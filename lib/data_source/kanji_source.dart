@@ -42,6 +42,7 @@ class KanjiSource {
     assert(query != null);
     query += options._queryString;
     query = query.trim();
+
     int kanjiPerPage = jishoHelper.KanjiPage.KANJI_PER_PAGE;
     int startPage = (startIndex / kanjiPerPage).floor();
     int endPage = ((startIndex + limit) / kanjiPerPage).ceil();
@@ -52,17 +53,16 @@ class KanjiSource {
     }
 
     List<KanjiPage> pages = await Future.wait(pageFutures);
-    List<String> symbols = [];
-    for (int pageIndex = 0, kanjiIndex = 0;
-        pageIndex < pages.length && kanjiIndex < limit;
-        pageIndex++) {
-      KanjiPage page = pages[pageIndex];
-      List<String> kanji = page.kanji;
-      int maxInPage = limit - kanjiIndex;
-      if (kanji.length > maxInPage) kanji = kanji.sublist(0, maxInPage);
-      symbols.addAll(kanji);
-      kanjiIndex += kanji.length;
+    int firstPageStart = startIndex % kanjiPerPage;
+    List<String> symbols = pages[0].kanji.sublist(
+        firstPageStart, min(pages[0].kanji.length, firstPageStart + limit));
+
+    for (int i = 1; i < pages.length; i++) {
+      symbols.addAll(pages[i]
+          .kanji
+          .sublist(0, min(pages[i].kanji.length, limit - symbols.length)));
     }
+
     return symbols;
   }
 

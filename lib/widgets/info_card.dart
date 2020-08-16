@@ -23,7 +23,7 @@ class InfoCard extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
         child: Text(
           this.heading,
-          style: theme.textTheme.headline5,
+          style: theme.textTheme.headline6,
         ),
       ));
       content.add(Divider());

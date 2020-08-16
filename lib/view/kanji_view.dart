@@ -167,6 +167,7 @@ class KanjiView extends StatelessWidget {
             if (wordList.length == 0) return Container();
             return InfoCard(
               heading: "Examples",
+              contentIndent: 20,
               child: Column(
                 children: wordList,
               ),

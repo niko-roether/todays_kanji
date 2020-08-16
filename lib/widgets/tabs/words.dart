@@ -26,6 +26,7 @@ class _WordsTabState extends State<WordsTab>
   final _controller = ScrollController();
   List<WordView> _words = [];
   bool _loading = false;
+  String _loadedKanji;
 
   Future<List<WordView>> _fetchWords(
     String character, {
@@ -64,21 +65,25 @@ class _WordsTabState extends State<WordsTab>
     super.build(context);
     return Consumer<AppState>(
       builder: (context, state, child) {
+        if (state.loadingKanji) return LoadingIndicator();
         var character = state.preferences.kanjiSymbol;
-        if (!_loading && _words.length == 0) {
+        if (!_loading && (_loadedKanji != character || _words.length == 0)) {
+          _words = [];
           _loading = true;
           _fetchWords(character).then(
             (value) => setState(() {
               _words = value;
+              _loadedKanji = character;
               _loading = false;
             }),
           );
         }
+
         _controller.addListener(() {
           if (!_loading &&
               _controller.position.pixels >
                   _controller.position.maxScrollExtent + 50)
-            _fetchWords(character);
+            _fetchWords(_loadedKanji);
         });
 
         var children = _words.map<Widget>((e) => InfoCard(child: e)).toList();

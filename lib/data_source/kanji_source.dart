@@ -167,7 +167,10 @@ class KanjiSource {
             wordtypes: List<String>.from(sense.parts_of_speech),
             info: List<String>.from(sense.info),
             appliesTo: List<String>.from(sense.restrictions),
-            url: sense.links.length > 0 ? sense.links[0].url : null,
+            url: sense.links.length > 0
+                ? sense.links[0].url
+                    .replaceFirst(RegExp("\\?oldid=[0-9]+\$"), "")
+                : null,
           );
         }).toList(),
         forms: word.japanese.map<WordFormModel>((form) {

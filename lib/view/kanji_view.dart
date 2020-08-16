@@ -82,7 +82,7 @@ class KanjiView extends StatelessWidget {
                   children: [
                     Text(
                       model.character,
-                      style: TextStyle(fontSize: 150),
+                      style: TextStyle(fontSize: 150, fontFamily: "Meiryo"),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 50),
@@ -101,9 +101,15 @@ class KanjiView extends StatelessWidget {
         Builder(builder: (BuildContext context) {
           var readings = <Text>[];
           if (model.kunyomi.length > 0)
-            readings.add(Text(model.kunyomi.join(", ")));
+            readings.add(Text(
+              model.kunyomi.join(", "),
+              style: TextStyle(fontFamily: "Meiryo"),
+            ));
           if (model.onyomi.length > 0)
-            readings.add(Text(model.onyomi.join(", ")));
+            readings.add(Text(
+              model.onyomi.join(", "),
+              style: TextStyle(fontFamily: "Meiryo"),
+            ));
           if (readings.length == 0) return Container();
           return InfoCard(
             heading: "Pronunciation",

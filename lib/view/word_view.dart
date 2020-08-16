@@ -15,15 +15,21 @@ class WordFormView extends StatelessWidget {
     if (model.word != null) {
       content.add(Text(
         model.word,
-        style: this.heading ? theme.textTheme.headline6 : null,
+        style: this.heading
+            ? theme.textTheme.headline6.apply(fontFamily: "Meiryo")
+            : null,
       ));
       if (model.reading != null) {
         content.add(Text(
           "「${model.reading}」",
+          style: TextStyle(fontFamily: "Meiryo"),
         ));
       }
     } else if (model.reading != null) {
-      content.add(Text(model.reading));
+      content.add(Text(
+        model.reading,
+        style: TextStyle(fontFamily: "Meiryo"),
+      ));
     }
 
     return Wrap(

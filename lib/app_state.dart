@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todays_kanji/data_source/kanji_source.dart';
 import 'package:todays_kanji/model/preferences_model.dart';
-import 'package:todays_kanji/util/general.dart';
 
 class AppState extends ChangeNotifier {
-  final _kanjiSource = KanjiSource();
   final PreferencesModel preferences;
   bool _loadingKanji = false;
 

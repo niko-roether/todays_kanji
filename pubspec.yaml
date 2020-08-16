@@ -27,6 +27,9 @@ flutter:
     - family:  KanjiIcons
       fonts:
         - asset: fonts/KanjiIcons.ttf
+    - family: Meiryo
+      fonts:
+        - asset: fonts/Meiryo.ttc
 
 flutter_icons:
   android: true

@@ -82,7 +82,7 @@ class _WordsTabState extends State<WordsTab>
           if (!_loading &&
               _controller.position.pixels >
                   _controller.position.maxScrollExtent + 50)
-            _fetchWords(_loadedKanji);
+            _loadWords(_loadedKanji);
         });
 
         var children = _words.map<Widget>((e) => InfoCard(child: e)).toList();
@@ -90,15 +90,7 @@ class _WordsTabState extends State<WordsTab>
           if (children.length == 0) return LoadingIndicator();
           children.add(LoadingIndicator());
         }
-        return ListView(
-          children: children,
-          controller: _controller
-            ..addListener(() {
-              if (_controller.position.pixels >
-                  _controller.position.maxScrollExtent + 50)
-                _loadWords(character);
-            }),
-        );
+        return ListView(children: children, controller: _controller);
       },
     );
 

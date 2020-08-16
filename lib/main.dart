@@ -30,6 +30,7 @@ class App extends StatelessWidget {
             },
           );
         });
+
         return ChangeNotifierProvider(
           create: (context) => appState,
           child: MaterialApp(

@@ -4,14 +4,14 @@ class LargeViewLayout extends StatelessWidget {
   final List<Widget> annotations;
   final Widget topLeft;
   final Widget focus;
-  final Widget meaning;
+  final Widget subfocus;
   final List<Widget> cards;
 
   LargeViewLayout({
     @required this.focus,
     this.annotations,
     this.topLeft,
-    this.meaning,
+    this.subfocus,
     this.cards,
   });
 
@@ -37,7 +37,7 @@ class LargeViewLayout extends StatelessWidget {
                   focus,
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 50),
-                    child: meaning,
+                    child: subfocus,
                   )
                 ],
               ),

@@ -30,7 +30,7 @@ class LargeKanjiView extends StatelessWidget {
           model.character,
           style: TextStyle(fontSize: 150),
         ),
-        meaning: Text(
+        subfocus: Text(
           model.meaning.join(", "),
           style: theme.textTheme.subtitle1,
           textAlign: TextAlign.center,

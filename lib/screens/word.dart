@@ -26,7 +26,7 @@ class WordScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("View Word 「$word」"),
+        title: Text("View Word"),
         centerTitle: true,
       ),
       body: SizedBox.expand(

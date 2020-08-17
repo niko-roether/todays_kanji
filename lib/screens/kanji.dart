@@ -29,7 +29,7 @@ class KanjiScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("View Kanji 「$kanjiSymbol」"),
+        title: Text("View Kanji"),
         centerTitle: true,
       ),
       body: SizedBox.expand(

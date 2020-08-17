@@ -13,10 +13,12 @@ class Annotation extends StatelessWidget {
     var color = this.color ?? theme.primaryColor;
     var textStyle = this.textStyle ?? theme.textTheme.bodyText2;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 4),
+      padding: EdgeInsets.all(4),
       child: Chip(
         label: Text(text, style: textStyle),
         backgroundColor: color,
+        elevation: 2,
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
     );
   }

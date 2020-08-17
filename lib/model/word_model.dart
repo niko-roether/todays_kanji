@@ -30,7 +30,7 @@ class WordModel {
   final List<WordFormModel> forms;
 
   WordModel({
-    this.jlpt,
+    this.jlpt = 0,
     this.common = false,
     @required this.senses,
     @required this.forms,

@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 
 import 'loading_indicator.dart';
 
+typedef ContentLoaderBuilder<T> = Widget Function(BuildContext, T);
+
 class ContentLoader<T> extends StatelessWidget {
   final Future<T> future;
-  final Widget Function(T) builder;
+  final ContentLoaderBuilder<T> builder;
   final void Function(Exception) reload;
-  ContentLoader({this.future, this.builder, this.reload});
+  ContentLoader({
+    @required this.future,
+    @required this.builder,
+    this.reload,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +37,7 @@ class ContentLoader<T> extends StatelessWidget {
                   ],
                 );
               }
-              return builder(snapshot.data);
+              return builder(context, snapshot.data);
             default:
               return Text("Unknown Error");
           }

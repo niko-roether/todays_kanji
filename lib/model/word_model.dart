@@ -25,11 +25,13 @@ class WordSenseModel {
 
 class WordModel {
   final int jlpt;
+  final bool common;
   final List<WordSenseModel> senses;
   final List<WordFormModel> forms;
 
   WordModel({
     this.jlpt,
+    this.common = false,
     @required this.senses,
     @required this.forms,
   });

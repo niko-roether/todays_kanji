@@ -27,7 +27,7 @@ class WordFormView extends StatelessWidget {
 
     return Wrap(
       children: content,
-      crossAxisAlignment: WrapCrossAlignment.end,
+      crossAxisAlignment: WrapCrossAlignment.center,
     );
   }
 }
@@ -111,54 +111,59 @@ class WordView extends StatelessWidget {
     final WordFormModel mainForm = model.forms[0];
     final contextWidth = MediaQuery.of(context).size.width;
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Row(
-          children: [
-            Container(
-                width: contextWidth * 0.5,
-                padding: EdgeInsets.symmetric(vertical: 8),
-                child: WordFormView(mainForm, heading: true)),
-            Row(
-              children: [
-                Builder(
-                  builder: (context) =>
-                      model.common ? Annotation("common") : Container(),
-                ),
-                Builder(
-                  builder: (context) => model.jlpt != null
-                      ? JLPTAnnotation(model.jlpt)
-                      : Container(),
-                ),
-              ],
+    return InkWell(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              Container(
+                  width: contextWidth * 0.5,
+                  padding: EdgeInsets.symmetric(vertical: 8),
+                  child: WordFormView(mainForm, heading: true)),
+              Row(
+                children: [
+                  Builder(
+                    builder: (context) =>
+                        model.common ? Annotation("common") : Container(),
+                  ),
+                  Builder(
+                    builder: (context) => model.jlpt != null
+                        ? JLPTAnnotation(model.jlpt)
+                        : Container(),
+                  ),
+                ],
+              ),
+            ],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          ),
+          partition && senses.length > 0
+              ? Divider(
+                  height: 8,
+                )
+              : Container(),
+          Padding(
+            padding: EdgeInsets.all(8),
+            child: Wrap(
+              direction: Axis.vertical,
+              spacing: 10,
+              children: senses,
             ),
-          ],
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        ),
-        partition && senses.length > 0
-            ? Divider(
-                height: 8,
-              )
-            : Container(),
-        Padding(
-          padding: EdgeInsets.all(8),
-          child: Wrap(
-            direction: Axis.vertical,
-            spacing: 10,
-            children: senses,
           ),
-        ),
-        partition && forms.length > 0 ? Divider() : Container(),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8),
-          child: Wrap(
-            children: forms,
-            crossAxisAlignment: WrapCrossAlignment.center,
-          ),
-        )
-      ],
-      crossAxisAlignment: CrossAxisAlignment.start,
+          partition && forms.length > 0 ? Divider() : Container(),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            child: Wrap(
+              children: forms,
+              crossAxisAlignment: WrapCrossAlignment.center,
+            ),
+          )
+        ],
+        crossAxisAlignment: CrossAxisAlignment.start,
+      ),
+      onTap: () {
+        Navigator.pushNamed(context, "/word", arguments: model.forms[0].word);
+      },
     );
   }
 }

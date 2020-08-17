@@ -22,7 +22,6 @@ class HomeScreen extends StatelessWidget {
       child: DefaultTabController(
         length: tabs.length,
         child: Scaffold(
-          backgroundColor: theme.backgroundColor,
           appBar: AppBar(
             title: Text("Today's Kanji"),
             centerTitle: true,

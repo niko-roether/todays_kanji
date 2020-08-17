@@ -161,6 +161,7 @@ class KanjiSource {
       return WordModel(
         jlpt:
             word.jlpt.length > 0 ? int.parse(word.jlpt[0].substring(6)) : null,
+        common: word.is_common,
         senses: word.senses.map<WordSenseModel>((sense) {
           return WordSenseModel(
             definitions: List<String>.from(sense.english_definitions),

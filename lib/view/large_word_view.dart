@@ -15,7 +15,13 @@ class LargeWordView extends StatelessWidget {
     if (model.jlpt > 0) annotations.add(JLPTAnnotation(model.jlpt));
     if (model.common) annotations.add(Annotation("common"));
     return LargeViewLayout(
-      focus: JapaneseText(model.forms[0].word),
+      focus: JapaneseText(model.forms[0].word, style: TextStyle(fontSize: 100)),
+      stackItems: [
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Row(children: annotations),
+        )
+      ],
     );
   }
 }

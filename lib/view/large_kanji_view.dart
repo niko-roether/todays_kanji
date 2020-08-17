@@ -35,7 +35,6 @@ class LargeKanjiView extends StatelessWidget {
           style: theme.textTheme.subtitle1,
           textAlign: TextAlign.center,
         ),
-        annotations: annotations,
         cards: [
           Builder(builder: (context) {
             return InfoCard(
@@ -99,40 +98,49 @@ class LargeKanjiView extends StatelessWidget {
             );
           }),
         ],
-        topLeft: IconButton(
-          icon: Icon(Icons.refresh),
-          onPressed: () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title: Text("Confirm Reroll"),
-                  content: SingleChildScrollView(
-                    child: Text(
-                      "Are you shure you want to reroll your daily kanji?",
+        stackItems: [
+          IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text("Confirm Reroll"),
+                    content: SingleChildScrollView(
+                      child: Text(
+                        "Are you shure you want to reroll your daily kanji?",
+                      ),
                     ),
-                  ),
-                  actions: [
-                    FlatButton(
-                      child: Text("REROLL"),
-                      onPressed: () {
-                        controller.rerollKanjiSymbol();
-                        state.loadingKanji = true;
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                    FlatButton(
-                      child: Text("CANCEL"),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    )
-                  ],
-                );
-              },
-            );
-          },
-        ),
+                    actions: [
+                      FlatButton(
+                        child: Text("REROLL"),
+                        onPressed: () {
+                          controller.rerollKanjiSymbol();
+                          state.loadingKanji = true;
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      FlatButton(
+                        child: Text("CANCEL"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      )
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+          Align(
+            alignment: Alignment.topRight,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: annotations,
+            ),
+          ),
+        ],
       );
     });
   }

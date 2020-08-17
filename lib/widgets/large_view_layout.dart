@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class LargeViewLayout extends StatelessWidget {
   final List<Widget> stackItems;
-  final Alignment annotationAlignment;
+  final Alignment stackAlign;
   final Widget focus;
   final Widget subfocus;
   final List<Widget> cards;
@@ -10,7 +10,7 @@ class LargeViewLayout extends StatelessWidget {
   LargeViewLayout({
     @required this.focus,
     this.stackItems = const [],
-    this.annotationAlignment = Alignment.topRight,
+    this.stackAlign = Alignment.topLeft,
     this.subfocus,
     this.cards,
   });
@@ -34,7 +34,7 @@ class LargeViewLayout extends StatelessWidget {
     List<Widget> children = [
       Padding(
         padding: EdgeInsets.all(18),
-        child: Stack(alignment: Alignment.topLeft, children: stackChildren),
+        child: Stack(alignment: stackAlign, children: stackChildren),
       ),
     ];
     children.addAll(cards ?? []);

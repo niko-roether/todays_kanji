@@ -129,7 +129,7 @@ class WordView extends StatelessWidget {
                         model.common ? Annotation("common") : Container(),
                   ),
                   Builder(
-                    builder: (context) => model.jlpt != null
+                    builder: (context) => model.jlpt > 0
                         ? JLPTAnnotation(model.jlpt)
                         : Container(),
                   ),

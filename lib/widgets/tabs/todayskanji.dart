@@ -35,9 +35,9 @@ class _TodaysKanjiTabState extends State<TodaysKanjiTab>
             _kanjiSource.getKanji(prefs.kanjiSymbol);
         return ContentLoader<KanjiModel>(
             future: modelFuture,
-            builder: (KanjiModel data) {
+            builder: (context, KanjiModel data) {
               if (data == null) return Container();
-              return LargeKanjiView(data, PreferencesController(prefs));
+              return LargeKanjiView(data);
             },
             reload: (Exception e) => setState(() {}));
       },

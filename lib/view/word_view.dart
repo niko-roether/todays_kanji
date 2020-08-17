@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todays_kanji/model/word_model.dart';
 import 'package:todays_kanji/widgets/annotation.dart';
+import 'package:todays_kanji/widgets/japanese_text.dart';
 import 'package:todays_kanji/widgets/weblink.dart';
 
 class WordFormView extends StatelessWidget {
@@ -13,23 +14,15 @@ class WordFormView extends StatelessWidget {
     var theme = Theme.of(context);
     List<Widget> content = [];
     if (model.word != null) {
-      content.add(Text(
+      content.add(JapaneseText(
         model.word,
-        style: this.heading
-            ? theme.textTheme.headline6.apply(fontFamily: "Meiryo")
-            : null,
+        style: this.heading ? theme.textTheme.headline6 : null,
       ));
       if (model.reading != null) {
-        content.add(Text(
-          "「${model.reading}」",
-          style: TextStyle(fontFamily: "Meiryo"),
-        ));
+        content.add(JapaneseText("「${model.reading}」"));
       }
     } else if (model.reading != null) {
-      content.add(Text(
-        model.reading,
-        style: TextStyle(fontFamily: "Meiryo"),
-      ));
+      content.add(JapaneseText(model.reading));
     }
 
     return Wrap(

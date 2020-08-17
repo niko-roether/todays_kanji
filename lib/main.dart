@@ -37,7 +37,7 @@ class App extends StatelessWidget {
             title: "Today's Kanji",
             theme: ThemeData.dark(),
             routes: loadRoutes(),
-            initialRoute: "/",
+            initialRoute: INITIAL_ROUTE,
           ),
         );
       },

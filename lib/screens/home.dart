@@ -6,6 +6,8 @@ import 'package:todays_kanji/widgets/tabs/words.dart';
 import 'package:todays_kanji/widgets/settings_button.dart';
 
 class HomeScreen extends StatelessWidget {
+  static const ROUTENAME = "/home";
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);

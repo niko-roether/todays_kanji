@@ -141,13 +141,13 @@ class KanjiSource {
 
   Future<List<WordModel>> searchWords(
     String query, {
-    int limit,
-    int startIndex,
+    int limit = 10,
+    int startIndex = 0,
     KanjiSearchOptions options = const KanjiSearchOptions(),
   }) async {
     assert(query != null);
-    query += options._queryString;
-    query.replaceAll(new RegExp("^ +"), "");
+    query += (options?._queryString ?? "");
+    query = query.trim();
     var wordData = (await jisho.searchForPhrase(query)).data;
     if (startIndex >= wordData.length) return [];
     wordData = wordData.sublist(
@@ -184,9 +184,7 @@ class KanjiSource {
     }).toList();
   }
 
-  Future<WordModel> getWord(String word, {KanjiSearchOptions options}) async =>
-      (await searchWords(
-        word,
-        options: options,
-      ))[0];
+  Future<WordModel> getWord(String word, {KanjiSearchOptions options}) async {
+    return (await searchWords(word, options: options, limit: 1))[0];
+  }
 }

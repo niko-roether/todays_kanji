@@ -1,7 +1,6 @@
 import "package:http/http.dart" as http;
 import 'package:todays_kanji/util/errors.dart';
 
-const _HIRAGANA_KATAKANE_CP_DIFF = 96;
 const _BASE_URL = "https://jisho.org/search/";
 
 class KanjiPage {
@@ -44,12 +43,4 @@ Future<KanjiPage> kanjiSearch(String query, int page) async {
   } on InvalidAPIResponseError {
     throw KanjiNotFoundError(query);
   }
-}
-
-// terrible solution, inputting non-katakana is UB
-String katakanaToHiragana(String katakana) {
-  return katakana.runes
-      .map((c) => c - _HIRAGANA_KATAKANE_CP_DIFF)
-      .toList()
-      .fold<String>("", (String s, int p) => s += String.fromCharCode(p));
 }

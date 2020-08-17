@@ -30,3 +30,17 @@ class NewKanjiModelFuture extends ChangeNotifier {
   final Future<KanjiModel> future;
   NewKanjiModelFuture(this.future);
 }
+
+const _HIRAGANA_KATAKANE_CP_DIFF = 96;
+const _KATAKANA_CP_START = 12448;
+const _KATAKANA_CP_END = 12543; // inclusive
+String katakanaToHiragana(String katakana) {
+  return katakana.runes
+      .map((c) {
+        if (_KATAKANA_CP_START <= c && c <= _KATAKANA_CP_END)
+          return c - _HIRAGANA_KATAKANE_CP_DIFF;
+        return c;
+      })
+      .toList()
+      .fold<String>("", (String s, int p) => s += String.fromCharCode(p));
+}

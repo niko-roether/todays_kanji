@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todays_kanji/model/word_model.dart';
+import 'package:todays_kanji/util/general.dart';
 import 'package:todays_kanji/widgets/annotation.dart';
 import 'package:todays_kanji/widgets/japanese_text.dart';
 import 'package:todays_kanji/widgets/weblink.dart';
@@ -162,7 +163,11 @@ class WordView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
       ),
       onTap: () {
-        Navigator.pushNamed(context, "/word", arguments: model.forms[0].word);
+        Navigator.pushNamed(
+          context,
+          "/word",
+          arguments: "${mainForm.word} ${katakanaToHiragana(mainForm.reading)}",
+        );
       },
     );
   }

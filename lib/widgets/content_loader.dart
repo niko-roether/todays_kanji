@@ -16,33 +16,30 @@ class ContentLoader<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.ltr,
-      child: FutureBuilder<T>(
-        future: future,
-        builder: (BuildContext context, AsyncSnapshot<T> snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return LoadingIndicator();
-            case ConnectionState.done:
-              if (snapshot.hasError) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Failed to Load"),
-                    FlatButton(
-                      child: Text("RETRY"),
-                      onPressed: () => reload(snapshot.error),
-                    )
-                  ],
-                );
-              }
-              return builder(context, snapshot.data);
-            default:
-              return Text("Unknown Error");
-          }
-        },
-      ),
+    return FutureBuilder<T>(
+      future: future,
+      builder: (BuildContext context, AsyncSnapshot<T> snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting:
+            return LoadingIndicator();
+          case ConnectionState.done:
+            if (snapshot.hasError) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Failed to Load"),
+                  FlatButton(
+                    child: Text("RETRY"),
+                    onPressed: () => reload(snapshot.error),
+                  )
+                ],
+              );
+            }
+            return builder(context, snapshot.data);
+          default:
+            return Text("Unknown Error");
+        }
+      },
     );
   }
 }

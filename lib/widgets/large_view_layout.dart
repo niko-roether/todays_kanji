@@ -34,7 +34,9 @@ class LargeViewLayout extends StatelessWidget {
     List<Widget> children = [
       Padding(
         padding: EdgeInsets.all(18),
-        child: Stack(alignment: stackAlign, children: stackChildren),
+        child: Stack(
+            alignment: stackAlign ?? Alignment.topLeft,
+            children: stackChildren),
       ),
     ];
     children.addAll(cards ?? []);

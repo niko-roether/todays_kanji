@@ -11,14 +11,13 @@ import 'package:todays_kanji/widgets/loading_indicator.dart';
 
 class LargeKanjiView extends StatelessWidget {
   final KanjiModel model;
-  final PreferencesController controller;
-  LargeKanjiView(this.model, this.controller);
+  LargeKanjiView(this.model);
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    var appState = Provider.of<AppState>(context);
     return Consumer<AppState>(builder: (context, state, child) {
+      var controller = PreferencesController(state.preferences);
       return ListView(
         children: [
           Padding(
@@ -45,7 +44,7 @@ class LargeKanjiView extends StatelessWidget {
                               onPressed: () {
                                 //TODO export this to controller
                                 controller.rerollKanjiSymbol();
-                                appState.loadingKanji = true;
+                                state.loadingKanji = true;
                                 Navigator.of(context).pop();
                               },
                             ),

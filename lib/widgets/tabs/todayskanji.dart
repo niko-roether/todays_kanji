@@ -7,7 +7,7 @@ import 'package:todays_kanji/controller/preferences_controller.dart';
 import 'package:todays_kanji/data_source/kanji_source.dart';
 import 'package:todays_kanji/model/kanji_model.dart';
 import 'package:todays_kanji/model/preferences_model.dart';
-import 'package:todays_kanji/view/kanji_view.dart';
+import 'package:todays_kanji/view/large_kanji_view.dart';
 import 'package:todays_kanji/widgets/content_loader.dart';
 import 'package:todays_kanji/widgets/loading_indicator.dart';
 
@@ -37,7 +37,7 @@ class _TodaysKanjiTabState extends State<TodaysKanjiTab>
             future: modelFuture,
             builder: (KanjiModel data) {
               if (data == null) return Container();
-              return KanjiView(data, PreferencesController(prefs));
+              return LargeKanjiView(data, PreferencesController(prefs));
             },
             reload: (Exception e) => setState(() {}));
       },

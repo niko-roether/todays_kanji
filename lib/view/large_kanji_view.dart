@@ -37,57 +37,67 @@ class LargeKanjiView extends StatelessWidget {
         ),
         annotations: annotations,
         cards: [
-          Builder(
-            builder: (BuildContext context) {
-              if (model.strokeOrderGifUrl == null) return Container();
-              return InfoCard(
-                heading: "Stroke Order",
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 26),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.network(
-                          model.strokeOrderGifUrl,
-                          frameBuilder:
-                              (context, child, frame, wasSynchronouslyLoaded) {
-                            if (wasSynchronouslyLoaded || frame != null)
-                              return child;
-                            return LoadingIndicator();
-                          },
-                          errorBuilder: (context, error, stackTrace) {
-                            //TODO alt load diagram?
-                            return Text("Failed to load stroke order gif.");
-                          },
-                        ),
-                        // TODO add alternatives
-                      ],
-                    ),
+          Builder(builder: (context) {
+            return InfoCard(
+              heading: "Pronunciation",
+              contentIndent: 20,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Flexible(child: JapaneseText(model.kunyomi.join("、"))),
+                  Flexible(child: JapaneseText(model.onyomi.join("、")))
+                ],
+              ),
+            );
+          }),
+          Builder(builder: (BuildContext context) {
+            if (model.strokeOrderGifUrl == null) return Container();
+            return InfoCard(
+              heading: "Stroke Order",
+              child: Center(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 26),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.network(
+                        model.strokeOrderGifUrl,
+                        frameBuilder:
+                            (context, child, frame, wasSynchronouslyLoaded) {
+                          if (wasSynchronouslyLoaded || frame != null)
+                            return child;
+                          return LoadingIndicator();
+                        },
+                        errorBuilder: (context, error, stackTrace) {
+                          //TODO alt load diagram?
+                          return Text("Failed to load stroke order gif.");
+                        },
+                      ),
+                      // TODO add alternatives
+                    ],
                   ),
                 ),
-              );
-            },
-          ),
-          Builder(
-            builder: (BuildContext context) {
-              var wordList = <Widget>[];
-              if (model.examples == null) return Container();
-              for (var word in model.examples) {
-                wordList.add(WordView(word, partition: false));
-                wordList.add(Divider());
-              }
-              wordList.removeLast();
-              if (wordList.length == 0) return Container();
-              return InfoCard(
-                heading: "Examples",
-                contentIndent: 20,
-                child: Column(
-                  children: wordList,
-                ),
-              );
-            },
-          ),
+              ),
+            );
+          }),
+          Builder(builder: (BuildContext context) {
+            var wordList = <Widget>[];
+            if (model.examples == null) return Container();
+            for (var word in model.examples) {
+              wordList.add(WordView(word, partition: false));
+              wordList.add(Divider());
+            }
+            wordList.removeLast();
+            if (wordList.length == 0) return Container();
+            return InfoCard(
+              heading: "Examples",
+              contentIndent: 20,
+              child: Column(
+                children: wordList,
+              ),
+            );
+          }),
         ],
         topLeft: IconButton(
           icon: Icon(Icons.refresh),

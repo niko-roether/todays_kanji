@@ -28,7 +28,10 @@ class KanjiScreen extends StatelessWidget {
     Future<KanjiModel> modelFuture = kanjiSource.getKanji(kanjiSymbol);
 
     return Scaffold(
-      appBar: AppBar(title: Text("View Kanji $kanjiSymbol")),
+      appBar: AppBar(
+        title: Text("View Kanji 「$kanjiSymbol」"),
+        centerTitle: true,
+      ),
       body: SizedBox.expand(
         child: ContentLoader<KanjiModel>(
           future: modelFuture,

@@ -25,7 +25,10 @@ class WordScreen extends StatelessWidget {
     Future<WordModel> modelFuture = kanjiSource.getWord(word);
 
     return Scaffold(
-      appBar: AppBar(title: Text("View Kanji $word")),
+      appBar: AppBar(
+        title: Text("View Word 「$word」"),
+        centerTitle: true,
+      ),
       body: SizedBox.expand(
         child: ContentLoader<WordModel>(
           future: modelFuture,

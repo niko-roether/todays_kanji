@@ -10,8 +10,11 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Settings"), centerTitle: true),
-      body: Consumer<AppState>(
-        builder: (context, state, child) => PreferencesView(state.preferences),
+      body: SizedBox.expand(
+        child: Consumer<AppState>(
+          builder: (context, state, child) =>
+              PreferencesView(state.preferences),
+        ),
       ),
     );
   }

@@ -29,11 +29,13 @@ class KanjiScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text("View Kanji $kanjiSymbol")),
-      body: ContentLoader<KanjiModel>(
-        future: modelFuture,
-        builder: (context, model) {
-          return LargeKanjiView(model);
-        },
+      body: SizedBox.expand(
+        child: ContentLoader<KanjiModel>(
+          future: modelFuture,
+          builder: (context, model) {
+            return LargeKanjiView(model);
+          },
+        ),
       ),
     );
   }

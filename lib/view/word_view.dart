@@ -39,7 +39,8 @@ class WordSenseView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
+    final theme = Theme.of(context);
+    final contextWidth = MediaQuery.of(context).size.width;
     var numStr = "($senseIndex)";
     var definitionText = "";
     if (model.appliesTo != null && model.appliesTo.length > 0)
@@ -68,7 +69,7 @@ class WordSenseView extends StatelessWidget {
       Text(numStr),
       SizedBox(width: 10),
       Container(
-        width: MediaQuery.of(context).size.width * 0.8,
+        width: contextWidth * 0.8,
         child: Column(
           children: definition,
           mainAxisSize: MainAxisSize.min,
@@ -108,19 +109,30 @@ class WordView extends StatelessWidget {
     }
 
     final WordFormModel mainForm = model.forms[0];
+    final contextWidth = MediaQuery.of(context).size.width;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Row(
           children: [
-            Padding(
+            Container(
+                width: contextWidth * 0.5,
                 padding: EdgeInsets.symmetric(vertical: 8),
                 child: WordFormView(mainForm, heading: true)),
-            Builder(
-              builder: (context) =>
-                  model.jlpt != null ? JLPTAnnotation(model.jlpt) : Container(),
-            )
+            Row(
+              children: [
+                Builder(
+                  builder: (context) =>
+                      model.common ? Annotation("common") : Container(),
+                ),
+                Builder(
+                  builder: (context) => model.jlpt != null
+                      ? JLPTAnnotation(model.jlpt)
+                      : Container(),
+                ),
+              ],
+            ),
           ],
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
         ),

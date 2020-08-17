@@ -24,17 +24,20 @@ class WordScreen extends StatelessWidget {
 
     Future<WordModel> modelFuture = kanjiSource.getWord(word);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("View Word"),
-        centerTitle: true,
-      ),
-      body: SizedBox.expand(
-        child: ContentLoader<WordModel>(
-          future: modelFuture,
-          builder: (context, model) {
-            return LargeWordView(model);
-          },
+    return ScrollConfiguration(
+      behavior: RubberBandScroll(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("View Word"),
+          centerTitle: true,
+        ),
+        body: SizedBox.expand(
+          child: ContentLoader<WordModel>(
+            future: modelFuture,
+            builder: (context, model) {
+              return LargeWordView(model);
+            },
+          ),
         ),
       ),
     );

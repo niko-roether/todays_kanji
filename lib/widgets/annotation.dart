@@ -12,9 +12,12 @@ class Annotation extends StatelessWidget {
     var theme = Theme.of(context);
     var color = this.color ?? theme.primaryColor;
     var textStyle = this.textStyle ?? theme.textTheme.bodyText2;
-    return Chip(
-      label: Text(text, style: textStyle),
-      backgroundColor: color,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 4),
+      child: Chip(
+        label: Text(text, style: textStyle),
+        backgroundColor: color,
+      ),
     );
   }
 }

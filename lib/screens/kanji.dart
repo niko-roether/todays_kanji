@@ -4,6 +4,7 @@ import 'package:todays_kanji/model/kanji_model.dart';
 import 'package:todays_kanji/util/general.dart';
 import 'package:todays_kanji/view/large_kanji_view.dart';
 import 'package:todays_kanji/widgets/content_loader.dart';
+import 'package:todays_kanji/widgets/default_app_bar.dart';
 
 class KanjiScreen extends StatelessWidget {
   static const ROUTENAME = "/kanji";
@@ -30,10 +31,7 @@ class KanjiScreen extends StatelessWidget {
     return ScrollConfiguration(
       behavior: RubberBandScroll(),
       child: Scaffold(
-        appBar: AppBar(
-          title: Text("View Kanji"),
-          centerTitle: true,
-        ),
+        appBar: DefaultAppBar(header: Text("View Kanji")),
         body: SizedBox.expand(
           child: ContentLoader<KanjiModel>(
             future: modelFuture,

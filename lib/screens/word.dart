@@ -4,6 +4,7 @@ import 'package:todays_kanji/model/word_model.dart';
 import 'package:todays_kanji/util/general.dart';
 import 'package:todays_kanji/view/large_word_view.dart';
 import 'package:todays_kanji/widgets/content_loader.dart';
+import 'package:todays_kanji/widgets/default_app_bar.dart';
 
 class WordScreen extends StatelessWidget {
   static const ROUTENAME = "/word";
@@ -27,10 +28,7 @@ class WordScreen extends StatelessWidget {
     return ScrollConfiguration(
       behavior: RubberBandScroll(),
       child: Scaffold(
-        appBar: AppBar(
-          title: Text("View Word"),
-          centerTitle: true,
-        ),
+        appBar: DefaultAppBar(header: Text("View Word")),
         body: SizedBox.expand(
           child: ContentLoader<WordModel>(
             future: modelFuture,

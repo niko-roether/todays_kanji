@@ -21,7 +21,7 @@ class ContentLoader<T> extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<T> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
-            return LoadingIndicator();
+            return Center(child: LoadingIndicator());
           case ConnectionState.done:
             if (snapshot.hasError) {
               return Column(

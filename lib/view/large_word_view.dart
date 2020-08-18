@@ -41,10 +41,13 @@ class LargeWordView extends StatelessWidget {
       stackAlign: Alignment.topCenter,
       cards: [
         Builder(builder: (context) {
-          List<WordSenseView> senses = model.senses
+          List<Widget> senses = model.senses
               .asMap()
               .entries
-              .map((e) => WordSenseView(e.value, e.key))
+              .map((e) => Padding(
+                    padding: EdgeInsets.only(bottom: 16),
+                    child: WordSenseView(e.value, e.key),
+                  ))
               .toList();
           return InfoCard(
             contentIndent: 20,

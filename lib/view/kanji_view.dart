@@ -19,14 +19,17 @@ class KanjiView extends StatelessWidget {
     if (model.jlpt > 0) annotations.add(JLPTAnnotation(model.jlpt));
     return InkWell(
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          JapaneseText(model.character, style: theme.textTheme.headline3),
-          Container(width: 16),
-          Container(
-            width: contextWidth * 0.5,
-            child: Text(model.meaning.join("; ")),
-          ),
+          Row(children: [
+            JapaneseText(model.character, style: theme.textTheme.headline3),
+            Container(width: 16),
+            Container(
+              width: contextWidth * 0.5,
+              child: Text(model.meaning.join("; ")),
+            ),
+          ]),
           Column(
             children: annotations,
             crossAxisAlignment: CrossAxisAlignment.end,

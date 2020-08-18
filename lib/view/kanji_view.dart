@@ -26,8 +26,8 @@ class KanjiView extends StatelessWidget {
             JapaneseText(model.character, style: theme.textTheme.headline3),
             Container(width: 16),
             Container(
-              width: contextWidth * 0.5,
-              child: Text(model.meaning.join("; ")),
+              width: contextWidth * 0.45,
+              child: Text(model.meaning.join(", ")),
             ),
           ]),
           Column(

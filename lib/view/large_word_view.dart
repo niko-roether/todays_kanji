@@ -75,6 +75,7 @@ class LargeWordView extends StatelessWidget {
               .toList();
           return InfoCard(
             heading: "Kanji",
+            contentIndent: 20,
             child: ContentLoader(
               future: Future.wait(futures),
               builder: (context, List<KanjiModel> models) {

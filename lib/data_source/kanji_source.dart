@@ -42,6 +42,9 @@ class KanjiSource {
     KanjiSearchOptions options = const KanjiSearchOptions(),
   }) async {
     assert(query != null);
+    assert(limit != null);
+    assert(startIndex != null);
+
     query += options._queryString;
     query = query.trim();
 

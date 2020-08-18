@@ -7,7 +7,7 @@ typedef ContentLoaderBuilder<T> = Widget Function(BuildContext, T);
 class ContentLoader<T> extends StatelessWidget {
   final Future<T> future;
   final ContentLoaderBuilder<T> builder;
-  final void Function(Exception) reload;
+  final void Function() reload;
   ContentLoader({
     @required this.future,
     @required this.builder,
@@ -30,7 +30,7 @@ class ContentLoader<T> extends StatelessWidget {
                   Text("Failed to Load"),
                   FlatButton(
                     child: Text("RETRY"),
-                    onPressed: () => reload(snapshot.error),
+                    onPressed: () => reload(),
                   )
                 ],
               );

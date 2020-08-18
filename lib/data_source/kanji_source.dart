@@ -114,7 +114,7 @@ class KanjiSource {
       character: kanji,
       jlpt: kanjiData.jlptLevel != null
           ? int.parse(kanjiData.jlptLevel.substring(1))
-          : null,
+          : 0,
       radicalForms: kanjiData.radical.forms,
       meaning: kanjiData.meaning.split(", "),
       frequency: kanjiData.newspaperFrequencyRank,

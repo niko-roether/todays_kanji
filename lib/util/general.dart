@@ -44,3 +44,11 @@ String katakanaToHiragana(String katakana) {
       .toList()
       .fold<String>("", (String s, int p) => s += String.fromCharCode(p));
 }
+
+const _KANJI_CP_START = 19968;
+const _KANJI_CP_END = 40895;
+bool isKanji(String char) {
+  if (char.length > 1) return false;
+  int cp = char.codeUnitAt(0);
+  return _KANJI_CP_START <= cp && cp <= _KANJI_CP_END;
+}

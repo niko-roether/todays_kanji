@@ -84,8 +84,11 @@ class LargeKanjiView extends StatelessWidget {
             var wordList = <Widget>[];
             if (model.examples == null) return Container();
             for (var word in model.examples) {
-              wordList.add(WordView(word, partition: false));
-              wordList.add(Divider());
+              wordList.add(Padding(
+                padding: EdgeInsets.only(bottom: 16),
+                child: WordView(word, partition: false),
+              ));
+              // wordList.add(Divider());
             }
             wordList.removeLast();
             if (wordList.length == 0) return Container();

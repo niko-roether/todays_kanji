@@ -1,7 +1,9 @@
 import 'dart:math';
 
 import 'package:todays_kanji/model/kanji_model.dart';
+import 'package:todays_kanji/model/word_form_model.dart';
 import 'package:todays_kanji/model/word_model.dart';
+import 'package:todays_kanji/model/word_sense_model.dart';
 import 'package:todays_kanji/util/errors.dart';
 import 'package:todays_kanji/util/jisho_helper.dart';
 import 'package:unofficial_jisho_api/api.dart' as jisho;

@@ -1,33 +1,6 @@
 import 'package:flutter/foundation.dart';
-
-class WordFormModel {
-  final String word;
-  final String reading;
-
-  WordFormModel({
-    this.word,
-    this.reading,
-  }) : assert(word != null || reading != null);
-}
-
-class WordSenseModel {
-  final List<String> definitions;
-  final List<String> wordtypes;
-  final List<String> info;
-  final List<String> appliesTo;
-  final String url;
-
-  WordSenseModel({
-    @required this.definitions,
-    this.wordtypes = const [],
-    this.info = const [],
-    this.appliesTo = const [],
-    this.url,
-  })  : assert(definitions != null),
-        assert(wordtypes != null),
-        assert(info != null),
-        assert(appliesTo != null);
-}
+import 'package:todays_kanji/model/word_form_model.dart';
+import 'package:todays_kanji/model/word_sense_model.dart';
 
 class WordModel {
   final int jlpt;

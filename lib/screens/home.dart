@@ -10,8 +10,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     final tabs = [
       Tab(icon: Icon(KanjiIcons.character), text: "Character"),
       Tab(icon: Icon(KanjiIcons.words), text: "Browse Words")

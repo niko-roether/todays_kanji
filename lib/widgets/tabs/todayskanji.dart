@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todays_kanji/app_state.dart';
-import 'package:todays_kanji/controller/preferences_controller.dart';
 import 'package:todays_kanji/data_source/kanji_source.dart';
 import 'package:todays_kanji/model/kanji_model.dart';
 import 'package:todays_kanji/model/preferences_model.dart';

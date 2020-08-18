@@ -161,8 +161,7 @@ class KanjiSource {
 
     return wordData.map<WordModel>((word) {
       return WordModel(
-        jlpt:
-            word.jlpt.length > 0 ? int.parse(word.jlpt[0].substring(6)) : null,
+        jlpt: word.jlpt.length > 0 ? int.parse(word.jlpt[0].substring(6)) : 0,
         common: word.is_common,
         senses: word.senses.map<WordSenseModel>((sense) {
           return WordSenseModel(

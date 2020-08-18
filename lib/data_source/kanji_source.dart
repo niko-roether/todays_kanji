@@ -120,10 +120,10 @@ class KanjiSource {
           : 0,
       radicalForms: kanjiData.radical.forms,
       meaning: kanjiData.meaning.split(", "),
-      frequency: kanjiData.newspaperFrequencyRank,
-      kunyomi: kanjiData.kunyomi,
-      onyomi: kanjiData.onyomi,
-      examples: examples,
+      frequency: kanjiData.newspaperFrequencyRank ?? 0,
+      kunyomi: kanjiData.kunyomi ?? [],
+      onyomi: kanjiData.onyomi ?? [],
+      examples: examples ?? [],
       radical: kanjiData.radical.symbol,
       parts: kanjiData.parts,
       strokeOrderGifUrl: kanjiData.strokeOrderGifUri,
@@ -168,10 +168,10 @@ class KanjiSource {
         common: word.is_common,
         senses: word.senses.map<WordSenseModel>((sense) {
           return WordSenseModel(
-            definitions: List<String>.from(sense.english_definitions),
-            wordtypes: List<String>.from(sense.parts_of_speech),
-            info: List<String>.from(sense.info),
-            appliesTo: List<String>.from(sense.restrictions),
+            definitions: List<String>.from(sense.english_definitions) ?? [],
+            wordtypes: List<String>.from(sense.parts_of_speech) ?? [],
+            info: List<String>.from(sense.info) ?? [],
+            appliesTo: List<String>.from(sense.restrictions) ?? [],
             url: sense.links.length > 0
                 ? sense.links[0].url
                     .replaceFirst(RegExp("\\?oldid=[0-9]+\$"), "")

@@ -36,7 +36,7 @@ class _TodaysKanjiTabState extends State<TodaysKanjiTab>
             future: modelFuture,
             builder: (context, KanjiModel data) {
               if (data == null) return Container();
-              return LargeKanjiView(data);
+              return LargeKanjiView(data, canReroll: true);
             },
             reload: () => setState(() {}));
       },

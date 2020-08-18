@@ -12,7 +12,8 @@ import 'package:todays_kanji/widgets/loading_indicator.dart';
 
 class LargeKanjiView extends StatelessWidget {
   final KanjiModel model;
-  LargeKanjiView(this.model);
+  final bool canReroll;
+  LargeKanjiView(this.model, {this.canReroll = false});
 
   @override
   Widget build(BuildContext context) {
@@ -102,35 +103,40 @@ class LargeKanjiView extends StatelessWidget {
           }),
         ],
         stackItems: [
-          IconButton(
-            icon: Icon(Icons.refresh),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: Text("Confirm Reroll"),
-                    content: SingleChildScrollView(
-                      child: Text(
-                        "Are you shure you want to reroll your daily kanji?",
-                      ),
-                    ),
-                    actions: [
-                      FlatButton(
-                        child: Text("REROLL"),
-                        onPressed: () {
-                          controller.rerollKanjiSymbol();
-                          state.loadingKanji = true;
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      FlatButton(
-                        child: Text("CANCEL"),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      )
-                    ],
+          Builder(
+            builder: (context) {
+              if (!canReroll) return Container();
+              return IconButton(
+                icon: Icon(Icons.refresh),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text("Confirm Reroll"),
+                        content: SingleChildScrollView(
+                          child: Text(
+                            "Are you shure you want to reroll your daily kanji?",
+                          ),
+                        ),
+                        actions: [
+                          FlatButton(
+                            child: Text("REROLL"),
+                            onPressed: () {
+                              controller.rerollKanjiSymbol();
+                              state.loadingKanji = true;
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          FlatButton(
+                            child: Text("CANCEL"),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          )
+                        ],
+                      );
+                    },
                   );
                 },
               );

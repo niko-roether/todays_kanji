@@ -31,7 +31,7 @@ class InfoCard extends StatelessWidget {
     if (child != null) {
       content.add(
         Padding(
-          padding: EdgeInsets.fromLTRB(contentIndent, 8, contentIndent, 8),
+          padding: EdgeInsets.fromLTRB(contentIndent, 2, contentIndent, 16),
           child: child,
         ),
       );

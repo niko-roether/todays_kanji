@@ -16,15 +16,21 @@ class KanjiModel {
 
   KanjiModel({
     @required this.character,
-    this.jlpt,
+    this.jlpt = 0, // 0 if none
     this.radicalForms,
-    this.meaning,
-    this.frequency,
-    this.kunyomi,
-    this.onyomi,
-    this.examples,
+    @required this.meaning,
+    this.frequency = 0, // 0 if none
+    this.kunyomi = const [],
+    this.onyomi = const [],
+    this.examples = const [],
     this.radical,
     this.parts,
     this.strokeOrderGifUrl,
-  });
+  })  : assert(character != null),
+        assert(jlpt != null),
+        assert(meaning != null),
+        assert(frequency != null),
+        assert(kunyomi != null),
+        assert(onyomi != null),
+        assert(examples != null);
 }

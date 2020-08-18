@@ -4,7 +4,10 @@ class WordFormModel {
   final String word;
   final String reading;
 
-  WordFormModel({@required this.word, @required this.reading});
+  WordFormModel({
+    this.word,
+    this.reading,
+  }) : assert(word != null || reading != null);
 }
 
 class WordSenseModel {
@@ -16,11 +19,14 @@ class WordSenseModel {
 
   WordSenseModel({
     @required this.definitions,
-    this.wordtypes,
-    this.info,
-    this.appliesTo,
+    this.wordtypes = const [],
+    this.info = const [],
+    this.appliesTo = const [],
     this.url,
-  });
+  })  : assert(definitions != null),
+        assert(wordtypes != null),
+        assert(info != null),
+        assert(appliesTo != null);
 }
 
 class WordModel {
@@ -34,5 +40,8 @@ class WordModel {
     this.common = false,
     @required this.senses,
     @required this.forms,
-  });
+  })  : assert(jlpt != null),
+        assert(common != null),
+        assert(senses != null),
+        assert(forms != null);
 }

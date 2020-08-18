@@ -76,7 +76,14 @@ class LargeWordView extends StatelessWidget {
               future: Future.wait(futures),
               builder: (context, List<KanjiModel> models) {
                 return Column(
-                  children: models.map((e) => KanjiView(e)).toList(),
+                  children: models
+                      .map(
+                        (e) => Padding(
+                          padding: EdgeInsets.only(bottom: 16),
+                          child: KanjiView(e),
+                        ),
+                      )
+                      .toList(),
                 );
               },
             ),

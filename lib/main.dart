@@ -19,6 +19,8 @@ class App extends StatelessWidget {
         if (snapshot.connectionState != ConnectionState.done) {
           return Container();
         }
+
+        //TODO export this stuff to a different file
         PreferencesModel prefs = snapshot.data;
         prefs.kanjiTimestamp = todayTimestamp() - (86400000 - 360000);
         var appState = AppState(preferences: prefs);

@@ -20,7 +20,7 @@ class PreferencesController {
   Future<void> updateKanjiSymbol({void Function() onReroll}) async {
     int now = DateTime.now().millisecondsSinceEpoch;
     int difference = now - model.kanjiTimestamp;
-    if (model.kanjiTimestamp == null || difference > 864000000) {
+    if (model.kanjiTimestamp == null || difference > 86400000) {
       if (onReroll != null) onReroll();
       rerollKanjiSymbol();
     }

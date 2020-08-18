@@ -49,6 +49,7 @@ class LargeWordView extends StatelessWidget {
                     child: WordSenseView(e.value, e.key),
                   ))
               .toList();
+          if (senses.length == 0) return Container();
           return InfoCard(
             contentIndent: 20,
             heading: "Meanings",
@@ -58,6 +59,7 @@ class LargeWordView extends StatelessWidget {
         Builder(builder: (context) {
           List<WordFormView> forms =
               model.forms.map((e) => WordFormView(e)).toList()..removeAt(0);
+          if (forms.length == 0) return Container();
           return InfoCard(
             contentIndent: 20,
             heading: "Other Forms",

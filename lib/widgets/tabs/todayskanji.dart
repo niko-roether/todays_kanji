@@ -38,7 +38,7 @@ class _TodaysKanjiTabState extends State<TodaysKanjiTab>
               if (data == null) return Container();
               return LargeKanjiView(data);
             },
-            reload: (Exception e) => setState(() {}));
+            reload: () => setState(() {}));
       },
     );
   }

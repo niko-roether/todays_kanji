@@ -17,7 +17,11 @@ class WordFormView extends StatelessWidget {
         style: this.heading ? theme.textTheme.headline6 : null,
       ));
       if (model.reading != null) {
-        content.add(JapaneseText("「${model.reading}」"));
+        content.add(JapaneseText("「${model.reading}」",
+            style: TextStyle(
+              //TODO somehow add this to theme
+              color: theme.textTheme.bodyText2.color.withOpacity(0.8),
+            )));
       }
     } else if (model.reading != null) {
       content.add(JapaneseText(model.reading));

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todays_kanji/data_source/kanji_source.dart';
 import 'package:todays_kanji/model/kanji_model.dart';
 import 'package:todays_kanji/model/word_model.dart';
+import 'package:todays_kanji/model/word_sense_model.dart';
 import 'package:todays_kanji/util/general.dart';
 import 'package:todays_kanji/view/word_form_view.dart';
 import 'package:todays_kanji/view/word_sense_view.dart';
@@ -64,6 +65,16 @@ class LargeWordView extends StatelessWidget {
             contentIndent: 20,
             heading: "Other Forms",
             child: Column(children: forms),
+          );
+        }),
+        Builder(builder: (context) {
+          List<String> info = [];
+          for (WordSenseModel sense in model.senses) info.addAll(sense.info);
+          return InfoCard(
+            heading: "Info",
+            child: Column(
+              children: info.map<Widget>((i) => Text(i)).toList(),
+            ),
           );
         }),
         Builder(builder: (context) {

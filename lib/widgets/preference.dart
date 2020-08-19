@@ -8,7 +8,7 @@ class Preference extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+      padding: EdgeInsets.symmetric(vertical: 8),
       child: Builder(
         builder: (context) {
           return Row(

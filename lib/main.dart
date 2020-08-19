@@ -7,6 +7,7 @@ import 'package:todays_kanji/controller/preferences_controller.dart';
 import 'package:todays_kanji/model/preferences_model.dart';
 import 'package:todays_kanji/routes.dart';
 import 'package:todays_kanji/util/general.dart';
+import 'package:todays_kanji/widgets/inherited/kanji_updater.dart';
 
 void main() => runApp(App());
 
@@ -19,27 +20,19 @@ class App extends StatelessWidget {
         if (snapshot.connectionState != ConnectionState.done) {
           return Container();
         }
-
-        //TODO export this stuff to a different file
         PreferencesModel prefs = snapshot.data;
-        prefs.kanjiTimestamp = todayTimestamp() - (86400000 - 360000);
         var appState = AppState(preferences: prefs);
-        var prefController = PreferencesController(appState.preferences);
-        Timer.periodic(Duration(seconds: 1), (timer) {
-          prefController.updateKanjiSymbol(
-            onReroll: () {
-              appState.loadingKanji = true;
-            },
-          );
-        });
 
-        return ChangeNotifierProvider(
-          create: (context) => appState,
-          child: MaterialApp(
-            title: "Today's Kanji",
-            theme: ThemeData.dark(),
-            routes: loadRoutes(),
-            initialRoute: INITIAL_ROUTE,
+        return KanjiUpdater(
+          appState: appState,
+          child: ChangeNotifierProvider(
+            create: (context) => appState,
+            child: MaterialApp(
+              title: "Today's Kanji",
+              theme: ThemeData.dark(),
+              routes: loadRoutes(),
+              initialRoute: INITIAL_ROUTE,
+            ),
           ),
         );
       },

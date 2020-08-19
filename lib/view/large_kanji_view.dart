@@ -6,6 +6,7 @@ import 'package:todays_kanji/model/kanji_model.dart';
 import 'package:todays_kanji/view/word_view.dart';
 import 'package:todays_kanji/widgets/annotation.dart';
 import 'package:todays_kanji/widgets/info_card.dart';
+import 'package:todays_kanji/widgets/inherited/kanji_updater.dart';
 import 'package:todays_kanji/widgets/japanese_text.dart';
 import 'package:todays_kanji/widgets/large_view_layout.dart';
 import 'package:todays_kanji/widgets/loading_indicator.dart';
@@ -19,7 +20,7 @@ class LargeKanjiView extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return Consumer<AppState>(builder: (context, state, child) {
-      var controller = PreferencesController(state.preferences);
+      final kanjiUpdater = KanjiUpdater.of(context);
 
       List<Widget> annotations = [];
       if (model.frequency != null)
@@ -123,16 +124,13 @@ class LargeKanjiView extends StatelessWidget {
                           FlatButton(
                             child: Text("REROLL"),
                             onPressed: () {
-                              controller.rerollKanjiSymbol();
-                              state.loadingKanji = true;
+                              kanjiUpdater.reroll();
                               Navigator.of(context).pop();
                             },
                           ),
                           FlatButton(
                             child: Text("CANCEL"),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
+                            onPressed: () => Navigator.of(context).pop(),
                           )
                         ],
                       );

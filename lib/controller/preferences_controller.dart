@@ -11,18 +11,8 @@ class PreferencesController {
     model.maxJLPT = maxJLPT;
   }
 
-  Future<void> rerollKanjiSymbol() async {
+  void setKanjiSymbol(String kanji) {
     model.kanjiTimestamp = todayTimestamp();
-    model.kanjiSymbol =
-        await _kanjiSource.randomKanjiSymbol(maxJlpt: model.maxJLPT);
-  }
-
-  Future<void> updateKanjiSymbol({void Function() onReroll}) async {
-    int now = DateTime.now().millisecondsSinceEpoch;
-    int difference = now - model.kanjiTimestamp;
-    if (model.kanjiTimestamp == null || difference > 86400000) {
-      if (onReroll != null) onReroll();
-      rerollKanjiSymbol();
-    }
+    model.kanjiSymbol = kanji;
   }
 }

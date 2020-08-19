@@ -41,7 +41,7 @@ class WordView extends StatelessWidget {
           Row(
             children: [
               Container(
-                  width: contextWidth * 0.5,
+                  width: contextWidth * 0.58, // FIXME not responsive
                   padding: EdgeInsets.symmetric(vertical: 8),
                   child: WordFormView(mainForm, heading: true)),
               Row(

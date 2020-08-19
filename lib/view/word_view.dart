@@ -61,22 +61,28 @@ class WordView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
           ),
           partition && senses.length > 0 ? Divider(height: 8) : Container(),
-          Padding(
-            padding: EdgeInsets.all(8),
-            child: Wrap(
-              direction: Axis.vertical,
-              spacing: 10,
-              children: senses,
-            ),
-          ),
+          Builder(builder: (context) {
+            if (senses.length == 0) return Container();
+            return Padding(
+              padding: EdgeInsets.all(8),
+              child: Wrap(
+                direction: Axis.vertical,
+                spacing: 10,
+                children: senses,
+              ),
+            );
+          }),
           partition && forms.length > 0 ? Divider(height: 8) : Container(),
-          Padding(
-            padding: EdgeInsets.all(8),
-            child: Wrap(
-              children: forms,
-              crossAxisAlignment: WrapCrossAlignment.center,
-            ),
-          )
+          Builder(builder: (context) {
+            if (forms.length == 0) return Container();
+            return Padding(
+              padding: EdgeInsets.all(8),
+              child: Wrap(
+                children: forms,
+                crossAxisAlignment: WrapCrossAlignment.center,
+              ),
+            );
+          })
         ],
         crossAxisAlignment: CrossAxisAlignment.start,
       ),

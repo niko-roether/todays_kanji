@@ -19,7 +19,14 @@ class WordSenseView extends StatelessWidget {
 
     List<Widget> definition = model.url != null
         ? [Flexible(child: Weblink(text: definitionText, url: model.url))]
-        : [Flexible(child: Text(definitionText))];
+        : [
+            Flexible(
+                child: Text(
+              definitionText,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+            ))
+          ];
     if (model.wordtypes.length > 0) {
       definition.add(
         Flexible(
@@ -30,14 +37,14 @@ class WordSenseView extends StatelessWidget {
         ),
       );
     }
-    if (model.info.length > 0) {
-      definition.add(Flexible(
-        child: Text(
-          model.info.join("; "),
-          style: theme.textTheme.caption,
-        ),
-      ));
-    }
+    // if (model.info.length > 0) {
+    //   definition.add(Flexible(
+    //     child: Text(
+    //       model.info.join("; "),
+    //       style: theme.textTheme.caption,
+    //     ),
+    //   ));
+    // }
     if (senseIndex < 20)
       numStr = String.fromCharCode("①".codeUnitAt(0) + senseIndex);
 
@@ -45,7 +52,7 @@ class WordSenseView extends StatelessWidget {
       Text(numStr),
       SizedBox(width: 10),
       Container(
-        width: contextWidth * 0.8,
+        width: contextWidth * 0.6,
         child: Column(
           children: definition,
           mainAxisSize: MainAxisSize.min,

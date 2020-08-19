@@ -70,6 +70,7 @@ class LargeWordView extends StatelessWidget {
         Builder(builder: (context) {
           List<String> info = [];
           for (WordSenseModel sense in model.senses) info.addAll(sense.info);
+          if (info.length == 0) return Container();
           return InfoCard(
             heading: "Info",
             child: Column(

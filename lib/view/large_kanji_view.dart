@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todays_kanji/app_state.dart';
-import 'package:todays_kanji/controller/preferences_controller.dart';
+import 'package:todays_kanji/data_source/kanji_source.dart';
 import 'package:todays_kanji/model/kanji_model.dart';
+import 'package:todays_kanji/view/kanji_view.dart';
 import 'package:todays_kanji/view/word_view.dart';
 import 'package:todays_kanji/widgets/annotation.dart';
+import 'package:todays_kanji/widgets/content_loader.dart';
 import 'package:todays_kanji/widgets/info_card.dart';
 import 'package:todays_kanji/widgets/inherited/kanji_updater.dart';
 import 'package:todays_kanji/widgets/japanese_text.dart';
@@ -14,6 +16,7 @@ import 'package:todays_kanji/widgets/loading_indicator.dart';
 class LargeKanjiView extends StatelessWidget {
   final KanjiModel model;
   final bool canReroll;
+  final kanjiSource = KanjiSource();
   LargeKanjiView(this.model, {this.canReroll = false});
 
   @override
@@ -52,6 +55,25 @@ class LargeKanjiView extends StatelessWidget {
               ),
             );
           }),
+          InfoCard(
+            contentIndent: 20,
+            heading: "Radical",
+            child: ContentLoader<KanjiModel>(
+              future: kanjiSource.getKanji(model.radical),
+              builder: (context, radical) {
+                return Padding(
+                  padding: EdgeInsets.only(bottom: 8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      KanjiView(radical),
+                      Text("Other parts: " + model.parts.join(", ")),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
           Builder(builder: (BuildContext context) {
             if (model.strokeOrderGifUrl == null) return Container();
             return InfoCard(

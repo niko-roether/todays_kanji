@@ -90,7 +90,6 @@ class LargeKanjiView extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: 16),
                 child: WordView(word, partition: false),
               ));
-              // wordList.add(Divider());
             }
             wordList.removeLast();
             if (wordList.length == 0) return Container();

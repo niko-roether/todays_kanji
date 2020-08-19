@@ -13,6 +13,7 @@ class SettingsScreen extends StatelessWidget {
       behavior: RubberBandScroll(),
       child: Scaffold(
         appBar: AppBar(title: Text("Settings"), centerTitle: true),
+        backgroundColor: Theme.of(context).cardColor,
         body: SizedBox.expand(
           child: Consumer<AppState>(
             builder: (context, state, child) =>

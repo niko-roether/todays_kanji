@@ -10,11 +10,12 @@ class PreferenceCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     List<Widget> children = <Widget>[
-      Text(heading, style: theme.textTheme.subtitle1)
+      Text(heading, style: theme.textTheme.headline6)
     ]..addAll(this.children);
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8),
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: children,
       ),
     );

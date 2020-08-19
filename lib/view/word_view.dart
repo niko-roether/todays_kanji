@@ -60,11 +60,7 @@ class WordView extends StatelessWidget {
             ],
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
           ),
-          partition && senses.length > 0
-              ? Divider(
-                  height: 8,
-                )
-              : Container(),
+          partition && senses.length > 0 ? Divider(height: 8) : Container(),
           Padding(
             padding: EdgeInsets.all(8),
             child: Wrap(
@@ -73,9 +69,9 @@ class WordView extends StatelessWidget {
               children: senses,
             ),
           ),
-          partition && forms.length > 0 ? Divider() : Container(),
+          partition && forms.length > 0 ? Divider(height: 8) : Container(),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
+            padding: EdgeInsets.all(8),
             child: Wrap(
               children: forms,
               crossAxisAlignment: WrapCrossAlignment.center,

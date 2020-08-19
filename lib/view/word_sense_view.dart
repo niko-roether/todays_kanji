@@ -18,11 +18,9 @@ class WordSenseView extends StatelessWidget {
     definitionText += model.definitions.join(", ");
 
     List<Widget> definition = model.url != null
-        ? [
-            Flexible(child: Weblink(text: definitionText, url: model.url)),
-          ]
+        ? [Flexible(child: Weblink(text: definitionText, url: model.url))]
         : [Flexible(child: Text(definitionText))];
-    if (model.wordtypes != null && model.wordtypes.length > 0) {
+    if (model.wordtypes.length > 0) {
       definition.add(
         Flexible(
           child: Text(
@@ -31,6 +29,14 @@ class WordSenseView extends StatelessWidget {
           ),
         ),
       );
+    }
+    if (model.info.length > 0) {
+      definition.add(Flexible(
+        child: Text(
+          model.info.join("; "),
+          style: theme.textTheme.caption,
+        ),
+      ));
     }
     if (senseIndex < 20)
       numStr = String.fromCharCode("①".codeUnitAt(0) + senseIndex);

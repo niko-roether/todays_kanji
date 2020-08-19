@@ -37,14 +37,6 @@ class WordSenseView extends StatelessWidget {
         ),
       );
     }
-    // if (model.info.length > 0) {
-    //   definition.add(Flexible(
-    //     child: Text(
-    //       model.info.join("; "),
-    //       style: theme.textTheme.caption,
-    //     ),
-    //   ));
-    // }
     if (senseIndex < 20)
       numStr = String.fromCharCode("①".codeUnitAt(0) + senseIndex);
 

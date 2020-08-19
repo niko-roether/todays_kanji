@@ -22,6 +22,12 @@ class PreferencesModel extends ChangeNotifier {
     _preferences.setInt("maxJLPT", value);
   }
 
+  int get rerollInterval =>
+      _preferences.get("rerollInterval") ?? (rerollInterval = 86400000);
+  set rerollInterval(int value) {
+    _preferences.setInt("rerollInterval", value);
+  }
+
   Map toJson() {
     Map json = {};
     for (String key in this._preferences.getKeys()) {

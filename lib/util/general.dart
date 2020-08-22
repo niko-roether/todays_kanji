@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todays_kanji/model/kanji_model.dart';
 import 'package:todays_kanji/widgets/error_display.dart';
+import 'package:todays_kanji/util/hiragana_romaji_mapping.dart';
 
 T cast<T>(x) => x is T ? x : null;
 
@@ -51,4 +52,15 @@ bool isKanji(String char) {
   if (char.length > 1) return false;
   int cp = char.codeUnitAt(0);
   return _KANJI_CP_START <= cp && cp <= _KANJI_CP_END;
+}
+
+String hiraganaToRomaji(String hiragana) {
+  String romaji = hiragana.split("").map((e) {
+    if (!HIRAGANA_ROMAJI_MAPPING.containsKey(e)) return e;
+    return HIRAGANA_ROMAJI_MAPPING[e];
+  }).join("");
+  for (int i = romaji.indexOf("x"); i != -1; i = romaji.indexOf("x")) {
+    romaji = romaji.substring(0, i - 1) + romaji.substring(i + 1);
+  }
+  return romaji;
 }

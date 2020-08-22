@@ -30,22 +30,33 @@ class _WordsTabState extends State<WordsTab>
   Future<List<WordView>> _fetchWords(
     String character, {
     int numWords = _WORDS_PER_RELOAD,
+    bool readingsAsRomaji = false,
   }) async {
     List<WordModel> models = await _kanjiSource.searchWords(
       "*$character*",
       limit: numWords,
       startIndex: _words.length,
     );
-    return models.map<WordView>((e) => WordView(e)).toList();
+    return models
+        .map<WordView>((e) => WordView(
+              e,
+              readingsAsRomaji: readingsAsRomaji,
+            ))
+        .toList();
   }
 
   Future<void> _loadWords(
     String character, {
     int numWords = _WORDS_PER_RELOAD,
+    bool readingsAsRomaji = false,
   }) async {
     if (!_loading) {
       setState(() => _loading = true);
-      List<WordView> views = await _fetchWords(character, numWords: numWords);
+      List<WordView> views = await _fetchWords(
+        character,
+        numWords: numWords,
+        readingsAsRomaji: readingsAsRomaji,
+      );
       setState(() {
         _words.addAll(views);
         _loading = false;
@@ -69,7 +80,9 @@ class _WordsTabState extends State<WordsTab>
         if (!_loading && (_loadedKanji != character || _words.length == 0)) {
           _words = [];
           _loading = true;
-          _fetchWords(character).then(
+          _fetchWords(character,
+                  readingsAsRomaji: state.preferences.readingsAsRomaji)
+              .then(
             (value) => setState(() {
               _words = value;
               _loadedKanji = character;
@@ -82,7 +95,8 @@ class _WordsTabState extends State<WordsTab>
           if (!_loading &&
               _controller.position.pixels >
                   _controller.position.maxScrollExtent + 50)
-            _loadWords(_loadedKanji);
+            _loadWords(_loadedKanji,
+                readingsAsRomaji: state.preferences.readingsAsRomaji);
         });
 
         var children = _words.map<Widget>((e) => InfoCard(child: e)).toList();

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:todays_kanji/app_state.dart';
 import 'package:todays_kanji/data_source/kanji_source.dart';
 import 'package:todays_kanji/model/kanji_model.dart';
+import 'package:todays_kanji/util/general.dart';
 import 'package:todays_kanji/view/kanji_view.dart';
 import 'package:todays_kanji/view/word_view.dart';
 import 'package:todays_kanji/widgets/annotation.dart';
@@ -24,6 +25,16 @@ class LargeKanjiView extends StatelessWidget {
     var theme = Theme.of(context);
     return Consumer<AppState>(builder: (context, state, child) {
       final kanjiUpdater = KanjiUpdater.of(context);
+
+      Widget kunyomi;
+      Widget onyomi;
+      if (state.preferences.readingsAsRomaji) {
+        kunyomi = Text(model.kunyomi.map((e) => kanaToRomaji(e)).join(", "));
+        onyomi = Text(model.onyomi.map((e) => kanaToRomaji(e)).join(", "));
+      } else {
+        kunyomi = JapaneseText(model.kunyomi.join("、"));
+        onyomi = JapaneseText(model.onyomi.join("、"));
+      }
 
       List<Widget> annotations = [];
       if (model.frequency != null)
@@ -50,10 +61,10 @@ class LargeKanjiView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   model.kunyomi.length > 0
-                      ? Flexible(child: JapaneseText(model.kunyomi.join("、")))
+                      ? Flexible(child: kunyomi)
                       : Container(),
                   model.onyomi.length > 0
-                      ? Flexible(child: JapaneseText(model.onyomi.join("、")))
+                      ? Flexible(child: onyomi)
                       : Container()
                 ],
               ),
@@ -114,7 +125,11 @@ class LargeKanjiView extends StatelessWidget {
             for (var word in model.examples) {
               wordList.add(Padding(
                 padding: EdgeInsets.only(bottom: 16),
-                child: WordView(word, partition: false),
+                child: WordView(
+                  word,
+                  partition: false,
+                  readingsAsRomaji: state.preferences.readingsAsRomaji,
+                ),
               ));
             }
             wordList.removeLast();

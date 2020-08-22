@@ -32,6 +32,7 @@ class PreferencesModel extends ChangeNotifier {
       _preferences.getBool("readingsAsRomaji") ?? (readingsAsRomaji = false);
   set readingsAsRomaji(bool value) {
     _preferences.setBool("readingsAsRomaji", value);
+    notifyListeners();
   }
 
   Map toJson() {

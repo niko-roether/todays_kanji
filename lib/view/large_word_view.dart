@@ -17,8 +17,9 @@ import 'kanji_view.dart';
 class LargeWordView extends StatelessWidget {
   final WordModel model;
   final kanjiSource = KanjiSource();
+  final bool readingsAsRomaji;
 
-  LargeWordView(this.model);
+  LargeWordView(this.model, {this.readingsAsRomaji = false});
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +59,13 @@ class LargeWordView extends StatelessWidget {
           );
         }),
         Builder(builder: (context) {
-          List<WordFormView> forms =
-              model.forms.map((e) => WordFormView(e)).toList()..removeAt(0);
+          List<WordFormView> forms = model.forms
+              .map((e) => WordFormView(
+                    e,
+                    readingAsRomaji: readingsAsRomaji,
+                  ))
+              .toList()
+                ..removeAt(0);
           if (forms.length == 0) return Container();
           return InfoCard(
             contentIndent: 20,

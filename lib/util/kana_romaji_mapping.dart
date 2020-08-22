@@ -78,6 +78,7 @@ const Map<String, String> HIRAGANA_ROMAJI_MAPPING = {
   "ぅ": "xu",
   "ぇ": "xe",
   "ぉ": "xo",
+  "っ": "_",
   "ア": "a",
   "イ": "i",
   "ウ": "u",
@@ -156,5 +157,6 @@ const Map<String, String> HIRAGANA_ROMAJI_MAPPING = {
   "ィ": "xi",
   "ゥ": "xu",
   "ェ": "xe",
-  "ォ": "xo"
+  "ォ": "xo",
+  "ッ": "_",
 };

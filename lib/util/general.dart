@@ -62,5 +62,10 @@ String kanaToRomaji(String hiragana) {
   for (int i = romaji.indexOf("x"); i != -1; i = romaji.indexOf("x")) {
     romaji = romaji.substring(0, i - 1) + romaji.substring(i + 1);
   }
+  for (int i = romaji.indexOf("_"); i != -1; i = romaji.indexOf("_")) {
+    romaji = romaji.substring(0, i) +
+        romaji.substring(i + 1, i + 2) +
+        romaji.substring(i + 1);
+  }
   return romaji;
 }

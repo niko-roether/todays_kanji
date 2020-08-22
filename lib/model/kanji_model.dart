@@ -9,6 +9,8 @@ class KanjiModel {
   final int frequency;
   final List<String> kunyomi;
   final List<String> onyomi;
+  final List<String> kunyomiRomaji;
+  final List<String> onyomiRomaji;
   final List<WordModel> examples;
   final String radical;
   final List<String> parts;
@@ -22,6 +24,8 @@ class KanjiModel {
     this.frequency = 0, // 0 if none
     this.kunyomi = const [],
     this.onyomi = const [],
+    this.kunyomiRomaji = const [],
+    this.onyomiRomaji = const [],
     this.examples = const [],
     this.radical,
     this.parts,

@@ -32,7 +32,6 @@ class WordView extends StatelessWidget {
     }
 
     final WordFormModel mainForm = model.forms[0];
-    final contextWidth = MediaQuery.of(context).size.width;
 
     return InkWell(
       child: Column(
@@ -40,10 +39,12 @@ class WordView extends StatelessWidget {
         children: [
           Row(
             children: [
-              Container(
-                  width: contextWidth * 0.58, // FIXME not responsive
+              Flexible(
+                child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 8),
-                  child: WordFormView(mainForm, heading: true)),
+                  child: WordFormView(mainForm, heading: true),
+                ),
+              ),
               Row(
                 children: [
                   Builder(

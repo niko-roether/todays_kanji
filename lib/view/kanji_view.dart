@@ -11,7 +11,6 @@ class KanjiView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    var contextWidth = MediaQuery.of(context).size.width;
 
     List<Widget> annotations = [];
     if (model.frequency > 0)
@@ -22,15 +21,21 @@ class KanjiView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(children: [
-            JapaneseText(model.character, style: theme.textTheme.headline3),
-            Container(width: 16),
-            Container(
-              width: contextWidth * 0.45,
-              child: Text(model.meaning.join(", ")),
-            ),
-          ]),
+          Row(
+            children: [
+              Flexible(
+                child: JapaneseText(model.character,
+                    style: theme.textTheme.headline3),
+              ),
+              SizedBox(width: 16),
+              Flexible(
+                child: Text(model.meaning.join(", ")),
+              ),
+            ],
+            mainAxisSize: MainAxisSize.min,
+          ),
           Column(
+            mainAxisSize: MainAxisSize.min,
             children: annotations,
             crossAxisAlignment: CrossAxisAlignment.end,
           )

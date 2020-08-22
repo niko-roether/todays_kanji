@@ -10,7 +10,6 @@ class WordSenseView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final contextWidth = MediaQuery.of(context).size.width;
     var numStr = "($senseIndex)";
     var definitionText = "";
     if (model.appliesTo != null && model.appliesTo.length > 0)
@@ -40,20 +39,21 @@ class WordSenseView extends StatelessWidget {
     if (senseIndex < 20)
       numStr = String.fromCharCode("①".codeUnitAt(0) + senseIndex);
 
-    List<Widget> content = [
-      Text(numStr),
-      SizedBox(width: 10),
-      Container(
-        width: contextWidth * 0.6,
-        child: Column(
+    return Row(
+      children: [
+        Flexible(
+          child: Text(numStr),
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Column(
           children: definition,
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
         ),
-      ),
-    ];
-    return Row(
-      children: content,
+      ],
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
     );
   }

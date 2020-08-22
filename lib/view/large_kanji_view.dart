@@ -49,8 +49,12 @@ class LargeKanjiView extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Flexible(child: JapaneseText(model.kunyomi.join("、"))),
-                  Flexible(child: JapaneseText(model.onyomi.join("、")))
+                  model.kunyomi.length > 0
+                      ? Flexible(child: JapaneseText(model.kunyomi.join("、")))
+                      : Container(),
+                  model.onyomi.length > 0
+                      ? Flexible(child: JapaneseText(model.onyomi.join("、")))
+                      : Container()
                 ],
               ),
             );

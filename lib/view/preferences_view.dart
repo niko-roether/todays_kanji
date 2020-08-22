@@ -5,6 +5,7 @@ import 'package:todays_kanji/model/preferences_model.dart';
 import 'package:todays_kanji/util/general.dart';
 import 'package:todays_kanji/widgets/preference_category.dart';
 import 'package:todays_kanji/widgets/preferences/dropdown_preference.dart';
+import 'package:todays_kanji/widgets/preferences/switch_preference.dart';
 
 class PreferencesView extends StatelessWidget {
   final PreferencesModel model;
@@ -32,7 +33,17 @@ class PreferencesView extends StatelessWidget {
                   DropdownPreferenceItem(text: "None", value: 0),
                 ],
                 initial: model.maxJLPT,
-                onChanged: (value) => {controller.setMaxJLPT(value)},
+                onChanged: (value) => controller.setMaxJLPT(value),
+              )
+            ],
+          ),
+          PreferenceCategory(
+            heading: "Display Options",
+            children: [
+              SwitchPreference(
+                name: "Show readings as Romaji",
+                initial: model.readingsAsRomaji,
+                onChanged: (value) => controller.setReadingsAsRomaji(value),
               )
             ],
           ),

@@ -6,13 +6,13 @@ class PreferencesModel extends ChangeNotifier {
 
   PreferencesModel(this._preferences);
 
-  String get kanjiSymbol => _preferences.get("kanjiSymbol");
+  String get kanjiSymbol => _preferences.getString("kanjiSymbol");
   set kanjiSymbol(String symbol) {
     _preferences.setString("kanjiSymbol", symbol);
     notifyListeners();
   }
 
-  int get kanjiTimestamp => _preferences.get("kanjiTimestamp");
+  int get kanjiTimestamp => _preferences.getInt("kanjiTimestamp");
   set kanjiTimestamp(int timestamp) {
     _preferences.setInt("kanjiTimestamp", timestamp);
   }

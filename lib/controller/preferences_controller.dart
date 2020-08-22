@@ -17,4 +17,8 @@ class PreferencesController {
   void setRerollInterval(Duration interval) {
     model.rerollInterval = interval.inMilliseconds;
   }
+
+  void setReadingsAsRomaji(bool value) {
+    model.readingsAsRomaji = value;
+  }
 }

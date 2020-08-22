@@ -17,15 +17,21 @@ class PreferencesModel extends ChangeNotifier {
     _preferences.setInt("kanjiTimestamp", timestamp);
   }
 
-  int get maxJLPT => _preferences.get("maxJLPT") ?? (maxJLPT = 0);
+  int get maxJLPT => _preferences.getInt("maxJLPT") ?? (maxJLPT = 0);
   set maxJLPT(int value) {
     _preferences.setInt("maxJLPT", value);
   }
 
   int get rerollInterval =>
-      _preferences.get("rerollInterval") ?? (rerollInterval = 86400000);
+      _preferences.getInt("rerollInterval") ?? (rerollInterval = 86400000);
   set rerollInterval(int value) {
     _preferences.setInt("rerollInterval", value);
+  }
+
+  bool get readingsAsRomaji =>
+      _preferences.getBool("readingsAsRomaji") ?? (readingsAsRomaji = false);
+  set readingsAsRomaji(bool value) {
+    _preferences.setBool("readingsAsRomaji", value);
   }
 
   Map toJson() {

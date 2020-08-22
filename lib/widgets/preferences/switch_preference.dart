@@ -3,11 +3,11 @@ import 'package:todays_kanji/widgets/preference.dart';
 
 class SwitchPreference extends StatelessWidget {
   final String name;
-  final bool value;
+  final bool initial;
   final void Function(bool value) onChanged;
   SwitchPreference({
     this.name,
-    this.value,
+    this.initial,
     @required this.onChanged,
   });
 
@@ -16,7 +16,7 @@ class SwitchPreference extends StatelessWidget {
     return Preference(
       name: name,
       child: Switch(
-        value: value,
+        value: initial,
         onChanged: onChanged,
       ),
     );

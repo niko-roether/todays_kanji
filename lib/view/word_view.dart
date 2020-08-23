@@ -14,7 +14,7 @@ class WordView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<WordSenseView> senses = [];
+    List<Widget> senses = [];
     List<WordSenseModel> senseData = model.senses;
     for (int i = 0; i < senseData.length; i++) {
       senses.add(WordSenseView(senseData[i], i));

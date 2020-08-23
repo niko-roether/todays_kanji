@@ -16,16 +16,33 @@ class WordSenseView extends StatelessWidget {
       definitionText += "【${model.appliesTo.join("、")}】";
     definitionText += model.definitions.join(", ");
 
-    List<Widget> definition = model.url != null
-        ? [Flexible(child: Weblink(text: definitionText, url: model.url))]
-        : [
-            Flexible(
-                child: Text(
-              definitionText,
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-            ))
-          ];
+    // List<Widget> definition = model.url != null
+    //     ? [Weblink(text: definitionText, url: model.url)]
+    //     : [
+    //         Text(
+    //           definitionText,
+    //           maxLines: 3,
+    //           overflow: TextOverflow.ellipsis,
+    //         )
+    //       ];
+
+    List<Widget> definition = [];
+    if (model.url == null) {
+      definition.add(Flexible(
+        child: Text(
+          definitionText,
+          maxLines: 3,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ));
+    } else {
+      definition.add(Flexible(
+        child: Weblink(
+          text: definitionText,
+          url: model.url,
+        ),
+      ));
+    }
     if (model.wordtypes.length > 0) {
       definition.add(
         Flexible(
@@ -47,10 +64,14 @@ class WordSenseView extends StatelessWidget {
         SizedBox(
           width: 10,
         ),
-        Column(
-          children: definition,
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        Container(
+          //FIXME make responsive
+          width: MediaQuery.of(context).size.width - 100,
+          child: Column(
+            children: definition,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+          ),
         ),
       ],
       mainAxisSize: MainAxisSize.min,

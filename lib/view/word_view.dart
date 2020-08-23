@@ -26,11 +26,9 @@ class WordView extends StatelessWidget {
     List<WordFormModel> formData = model.forms.sublist(1);
     if (0 < formData.length) {
       forms.add(Text("Also:"));
-      forms.add(Container(width: 10));
     }
     for (WordFormModel form in formData) {
       forms.add(WordFormView(form));
-      if (form != formData.last) forms.add(Text(" "));
     }
 
     final WordFormModel mainForm = model.forms[0];
@@ -73,9 +71,9 @@ class WordView extends StatelessWidget {
             if (forms.length == 0) return Container();
             return Padding(
               padding: EdgeInsets.all(8),
-              child: Wrap(
+              child: Column(
                 children: forms,
-                crossAxisAlignment: WrapCrossAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
               ),
             );
           })

@@ -40,7 +40,12 @@ class LargeWordView extends StatelessWidget {
           ),
         ],
       ),
-      subfocus: JapaneseText(model.forms[0].reading),
+      subfocus: Consumer<AppState>(builder: (context, state, child) {
+        String reading = model.forms[0].reading;
+        if (state.preferences.readingsAsRomaji)
+          return Text(kanaToRomaji(reading));
+        return JapaneseText(reading);
+      }),
       stackAlign: Alignment.topCenter,
       cards: [
         Builder(builder: (context) {

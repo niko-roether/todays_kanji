@@ -54,8 +54,8 @@ bool isKanji(String char) {
   return _KANJI_CP_START <= cp && cp <= _KANJI_CP_END;
 }
 
-String kanaToRomaji(String hiragana) {
-  String romaji = hiragana.split("").map((e) {
+String kanaToRomaji(String kana) {
+  String romaji = kana.split("").map((e) {
     if (!HIRAGANA_ROMAJI_MAPPING.containsKey(e)) return e;
     return HIRAGANA_ROMAJI_MAPPING[e];
   }).join("");

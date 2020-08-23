@@ -27,7 +27,7 @@ class LargeKanjiView extends StatelessWidget {
     final kanjiUpdater = KanjiUpdater.of(context);
 
     List<Widget> annotations = [];
-    if (model.frequency != null)
+    if (model.frequency > 0)
       annotations.add(Annotation("${model.frequency}/2500"));
     if (model.jlpt > 0) annotations.add(JLPTAnnotation(model.jlpt));
 

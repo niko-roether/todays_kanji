@@ -21,18 +21,17 @@ class KanjiView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
-            children: [
-              Flexible(
-                child: JapaneseText(model.character,
-                    style: theme.textTheme.headline3),
-              ),
-              SizedBox(width: 16),
-              Flexible(
-                child: Text(model.meaning.join(", ")),
-              ),
-            ],
-            mainAxisSize: MainAxisSize.min,
+          Wrap(children: [
+            Flexible(
+              child: JapaneseText(model.character,
+                  style: theme.textTheme.headline3),
+            ),
+            Flexible(
+              child: SizedBox(width: 16, height: 0),
+            ),
+          ]),
+          Flexible(
+            child: Text(model.meaning.join(", ")),
           ),
           Column(
             mainAxisSize: MainAxisSize.min,

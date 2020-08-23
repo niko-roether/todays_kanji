@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todays_kanji/data_source/kanji_source.dart';
 import 'package:todays_kanji/model/kanji_model.dart';
 import 'package:todays_kanji/model/word_model.dart';
@@ -12,14 +13,14 @@ import 'package:todays_kanji/widgets/info_card.dart';
 import 'package:todays_kanji/widgets/japanese_text.dart';
 import 'package:todays_kanji/widgets/large_view_layout.dart';
 
+import '../app_state.dart';
 import 'kanji_view.dart';
 
 class LargeWordView extends StatelessWidget {
   final WordModel model;
   final kanjiSource = KanjiSource();
-  final bool readingsAsRomaji;
 
-  LargeWordView(this.model, {this.readingsAsRomaji = false});
+  LargeWordView(this.model);
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +66,6 @@ class LargeWordView extends StatelessWidget {
           List<WordFormView> forms = model.forms
               .map((e) => WordFormView(
                     e,
-                    readingAsRomaji: readingsAsRomaji,
                   ))
               .toList()
                 ..removeAt(0);

@@ -37,12 +37,7 @@ class _WordsTabState extends State<WordsTab>
       limit: numWords,
       startIndex: _words.length,
     );
-    return models
-        .map<WordView>((e) => WordView(
-              e,
-              readingsAsRomaji: readingsAsRomaji,
-            ))
-        .toList();
+    return models.map<WordView>((e) => WordView(e)).toList();
   }
 
   Future<void> _loadWords(

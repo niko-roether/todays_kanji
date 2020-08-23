@@ -10,8 +10,7 @@ import 'package:todays_kanji/widgets/annotation.dart';
 class WordView extends StatelessWidget {
   final WordModel model;
   final bool partition;
-  final bool readingsAsRomaji;
-  WordView(this.model, {this.partition = true, this.readingsAsRomaji = false});
+  WordView(this.model, {this.partition = true});
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +27,7 @@ class WordView extends StatelessWidget {
       forms.add(Container(width: 10));
     }
     for (WordFormModel form in formData) {
-      forms.add(WordFormView(
-        form,
-        readingAsRomaji: readingsAsRomaji,
-      ));
+      forms.add(WordFormView(form));
       if (form != formData.last) forms.add(Text(" "));
     }
 
@@ -46,8 +42,7 @@ class WordView extends StatelessWidget {
               Flexible(
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 8),
-                  child: WordFormView(mainForm,
-                      heading: true, readingAsRomaji: readingsAsRomaji),
+                  child: WordFormView(mainForm, heading: true),
                 ),
               ),
               Row(

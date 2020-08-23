@@ -36,6 +36,7 @@ class LargeWordView extends StatelessWidget {
           ),
           JapaneseText(
             model.forms[0].word,
+            textAlign: TextAlign.center,
             style: TextStyle(fontSize: 60),
           ),
         ],

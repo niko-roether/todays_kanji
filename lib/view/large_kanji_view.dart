@@ -126,8 +126,8 @@ class LargeKanjiView extends StatelessWidget {
               child: WordView(word, partition: false),
             ));
           }
-          wordList.removeLast();
           if (wordList.length == 0) return Container();
+          wordList.removeLast();
           return InfoCard(
             heading: "Examples",
             contentIndent: 20,

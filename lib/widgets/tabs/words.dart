@@ -20,36 +20,31 @@ class WordsTab extends StatefulWidget {
 
 class _WordsTabState extends State<WordsTab>
     with AutomaticKeepAliveClientMixin {
-  static const int _WORDS_PER_RELOAD = 10;
   final _kanjiSource = KanjiSource();
   final _controller = ScrollController();
   List<WordView> _words = [];
+  int loadedPages = 0;
   bool _loading = false;
   String _loadedKanji;
 
   Future<List<WordView>> _fetchWords(
     String character, {
-    int numWords = _WORDS_PER_RELOAD,
     bool readingsAsRomaji = false,
   }) async {
-    List<WordModel> models = await _kanjiSource.searchWords(
-      "*$character*",
-      limit: numWords,
-      startIndex: _words.length,
-    );
+    List<WordModel> models =
+        await _kanjiSource.searchWords("*$character*", page: loadedPages);
+    loadedPages++;
     return models.map<WordView>((e) => WordView(e)).toList();
   }
 
   Future<void> _loadWords(
     String character, {
-    int numWords = _WORDS_PER_RELOAD,
     bool readingsAsRomaji = false,
   }) async {
     if (!_loading) {
       setState(() => _loading = true);
       List<WordView> views = await _fetchWords(
         character,
-        numWords: numWords,
         readingsAsRomaji: readingsAsRomaji,
       );
       setState(() {

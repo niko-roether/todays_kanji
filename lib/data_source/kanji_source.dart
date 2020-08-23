@@ -28,60 +28,68 @@ class KanjiSource {
   }) async {
     query += options._queryString;
     query = query.trim();
-    return (await jishoHelper.kanjiSearch(query, 1)).numKanji;
+    return (await jishoHelper.kanjiSymbolSearch(query)).numResults;
   }
 
-  Future<int> numWords(String query) async {
-    return (await jisho.searchForPhrase(query)).data.length;
-  }
+  // Future<List<String>> searchKanjiSymbols(
+  //   String query, {
+  //   int limit = 100,
+  //   int startIndex = 0,
+  //   KanjiSearchOptions options = const KanjiSearchOptions(),
+  // }) async {
+  //   assert(query != null);
+  //   assert(limit != null);
+  //   assert(startIndex != null);
+
+  //   query += options._queryString;
+  //   query = query.trim();
+
+  //   int kanjiPerPage = jishoHelper.RESULTS_PER_PAGE;
+  //   int startPage = (startIndex / kanjiPerPage).floor();
+  //   int endPage = ((startIndex + limit) / kanjiPerPage).ceil();
+
+  //   List<Future<ResultPage<String>>> pageFutures = [];
+  //   for (int pageIndex = startPage; pageIndex < endPage; pageIndex++) {
+  //     pageFutures.add(jishoHelper.kanjiSymbolSearch(query, pageIndex + 1));
+  //   }
+
+  //   List<ResultPage<String>> pages = await Future.wait(pageFutures);
+  //   int firstPageStart = startIndex % kanjiPerPage;
+  //   List<String> symbols = pages[0].results.sublist(
+  //       firstPageStart, min(pages[0].results.length, firstPageStart + limit));
+
+  //   for (int i = 1; i < pages.length; i++) {
+  //     symbols.addAll(pages[i]
+  //         .results
+  //         .sublist(0, min(pages[i].results.length, limit - symbols.length)));
+  //   }
+
+  //   return symbols;
+  // }
 
   Future<List<String>> searchKanjiSymbols(
     String query, {
-    int limit = 100,
-    int startIndex = 0,
-    KanjiSearchOptions options = const KanjiSearchOptions(),
+    int page = 0,
+    KanjiSearchOptions options,
   }) async {
     assert(query != null);
-    assert(limit != null);
-    assert(startIndex != null);
+    assert(page != null);
 
     query += options._queryString;
     query = query.trim();
 
-    int kanjiPerPage = jishoHelper.KanjiPage.KANJI_PER_PAGE;
-    int startPage = (startIndex / kanjiPerPage).floor();
-    int endPage = ((startIndex + limit) / kanjiPerPage).ceil();
-
-    List<Future<KanjiPage>> pageFutures = [];
-    for (int pageIndex = startPage; pageIndex < endPage; pageIndex++) {
-      pageFutures.add(jishoHelper.kanjiSearch(query, pageIndex + 1));
-    }
-
-    List<KanjiPage> pages = await Future.wait(pageFutures);
-    int firstPageStart = startIndex % kanjiPerPage;
-    List<String> symbols = pages[0].kanji.sublist(
-        firstPageStart, min(pages[0].kanji.length, firstPageStart + limit));
-
-    for (int i = 1; i < pages.length; i++) {
-      symbols.addAll(pages[i]
-          .kanji
-          .sublist(0, min(pages[i].kanji.length, limit - symbols.length)));
-    }
-
-    return symbols;
+    return (await jishoHelper.kanjiSymbolSearch(query, page: page)).results;
   }
 
   Future<List<KanjiModel>> searchKanji(
     String query, {
-    int limit,
-    int startIndex,
+    int page,
     KanjiSearchOptions options = const KanjiSearchOptions(),
   }) async {
     assert(query != null);
     List<String> symbols = await searchKanjiSymbols(
       query,
-      limit: limit,
-      startIndex: startIndex,
+      page: page,
       options: options,
     );
     List<Future<KanjiModel>> modelFutures =
@@ -134,33 +142,29 @@ class KanjiSource {
     var options = KanjiSearchOptions(joyo: true, jlpt: maxJlpt);
     int length = await numKanji("", options: options);
     var index = Random().nextInt(length);
+
+    int kanjiPerPage = jishoHelper.RESULTS_PER_PAGE;
+    int pageNum = (index / kanjiPerPage).floor();
+    int pageIndex = index % kanjiPerPage;
+
     List<String> list = await searchKanjiSymbols(
       "",
       options: options,
-      limit: 1,
-      startIndex: index,
+      page: pageNum,
     );
     if (list.length == 0) throw KanjiNotFoundError("[random]");
-    return list[0];
+    return list[pageIndex];
   }
 
   Future<List<WordModel>> searchWords(
     String query, {
-    int limit = 10,
-    int startIndex = 0,
+    int page = 0,
     KanjiSearchOptions options = const KanjiSearchOptions(),
   }) async {
     assert(query != null);
     query += (options?._queryString ?? "");
     query = query.trim();
-    var wordData = (await jisho.searchForPhrase(query)).data;
-    if (startIndex >= wordData.length) return [];
-    wordData = wordData.sublist(
-      startIndex,
-      wordData.length > startIndex + limit && limit > 0
-          ? startIndex + limit
-          : null,
-    );
+    var wordData = (await jishoHelper.wordSearch(query, page: page)).results;
 
     return wordData.map<WordModel>((word) {
       return WordModel(
@@ -189,6 +193,6 @@ class KanjiSource {
   }
 
   Future<WordModel> getWord(String word, {KanjiSearchOptions options}) async {
-    return (await searchWords(word, options: options, limit: 1))[0];
+    return (await searchWords(word, options: options))[0];
   }
 }

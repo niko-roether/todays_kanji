@@ -61,7 +61,11 @@ class InvalidAPIResponseError {
 
   @override
   String toString() {
-    return "Invalid API response:\n\n$response";
+    String res = response;
+    if (res.length > 100) {
+      res = res.substring(0, 100) + "...";
+    }
+    return "Invalid API response:\n\n$res";
   }
 }
 

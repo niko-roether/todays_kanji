@@ -5,7 +5,6 @@ import 'package:todays_kanji/model/word_form_model.dart';
 import 'package:todays_kanji/model/word_model.dart';
 import 'package:todays_kanji/model/word_sense_model.dart';
 import 'package:todays_kanji/util/errors.dart';
-import 'package:todays_kanji/util/jisho_helper.dart';
 import 'package:unofficial_jisho_api/api.dart' as jisho;
 import "package:todays_kanji/util/jisho_helper.dart" as jishoHelper;
 
@@ -133,7 +132,7 @@ class KanjiSource {
     return wordData.map<WordModel>((word) {
       return WordModel(
         jlpt: word.jlpt.length > 0 ? int.parse(word.jlpt[0].substring(6)) : 0,
-        common: word.is_common,
+        common: word.is_common ?? false,
         senses: word.senses.map<WordSenseModel>((sense) {
           return WordSenseModel(
             definitions: List<String>.from(sense.english_definitions) ?? [],
@@ -156,7 +155,16 @@ class KanjiSource {
     }).toList();
   }
 
-  Future<WordModel> getWord(String word, {KanjiSearchOptions options}) async {
-    return (await searchWords(word, options: options))[0];
+  Future<WordModel> getWord(
+    String word, {
+    KanjiSearchOptions options,
+    String pronunciation,
+  }) async {
+    String query = word;
+    if (pronunciation != null) query += " $pronunciation";
+    return (await searchWords(query, options: options)).firstWhere(
+        (wordModel) => wordModel.forms.any((form) => form.word == word),
+        orElse: () => throw WordNotFoundError(
+            "$word (pronunciation \"$pronunciation\")"));
   }
 }

@@ -38,6 +38,9 @@ const _KATAKANA_CP_END = 12543; // inclusive
 String katakanaToHiragana(String katakana) {
   return katakana.runes
       .map((c) {
+        if (c == "ー".codeUnitAt(0)) {
+          return c;
+        }
         if (_KATAKANA_CP_START <= c && c <= _KATAKANA_CP_END)
           return c - _HIRAGANA_KATAKANE_CP_DIFF;
         return c;

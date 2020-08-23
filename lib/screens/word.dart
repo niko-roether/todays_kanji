@@ -6,24 +6,35 @@ import 'package:todays_kanji/view/large_word_view.dart';
 import 'package:todays_kanji/widgets/content_loader.dart';
 import 'package:todays_kanji/widgets/default_app_bar.dart';
 
+class WordScreenArguments {
+  final String word;
+  final String pronunciation;
+
+  WordScreenArguments(this.word, this.pronunciation);
+}
+
 class WordScreen extends StatelessWidget {
   static const ROUTENAME = "/word";
   final kanjiSource = KanjiSource();
 
   @override
   Widget build(BuildContext context) {
-    final String word = cast<String>(ModalRoute.of(context).settings.arguments);
+    final args =
+        cast<WordScreenArguments>(ModalRoute.of(context).settings.arguments);
 
-    if (word == null) {
+    if (args == null) {
       showError(
         context,
-        "The supplied word was null or of invalid type",
+        "The supplied arguments were null or of invalid type",
         onClose: () => Navigator.pop(context),
       );
       return Container();
     }
 
-    Future<WordModel> modelFuture = kanjiSource.getWord(word);
+    Future<WordModel> modelFuture = kanjiSource.getWord(
+      args.word,
+      pronunciation: args.pronunciation,
+    );
 
     return ScrollConfiguration(
       behavior: RubberBandScroll(),

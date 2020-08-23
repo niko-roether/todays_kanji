@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:todays_kanji/main.dart';
 import 'package:todays_kanji/model/word_form_model.dart';
 import 'package:todays_kanji/model/word_model.dart';
 import 'package:todays_kanji/model/word_sense_model.dart';
+import 'package:todays_kanji/screens/word.dart';
 import 'package:todays_kanji/util/general.dart';
 import 'package:todays_kanji/view/word_form_view.dart';
 import 'package:todays_kanji/view/word_sense_view.dart';
@@ -84,7 +86,11 @@ class WordView extends StatelessWidget {
         Navigator.pushNamed(
           context,
           "/word",
-          arguments: "${mainForm.word} ${katakanaToHiragana(mainForm.reading)}",
+          arguments: WordScreenArguments(
+            mainForm.word,
+            katakanaToHiragana(mainForm.reading),
+          ),
+          // arguments: "${mainForm.word} ${katakanaToHiragana(mainForm.reading)}",
         );
       },
     );

@@ -55,7 +55,10 @@ class LargeWordView extends StatelessWidget {
           return InfoCard(
             contentIndent: 20,
             heading: "Meanings",
-            child: Column(children: senses),
+            child: Column(
+              children: senses,
+              crossAxisAlignment: CrossAxisAlignment.start,
+            ),
           );
         }),
         Builder(builder: (context) {

@@ -47,15 +47,8 @@ class WordView extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Builder(
-                    builder: (context) =>
-                        model.common ? Annotation("common") : Container(),
-                  ),
-                  Builder(
-                    builder: (context) => model.jlpt > 0
-                        ? JLPTAnnotation(model.jlpt)
-                        : Container(),
-                  ),
+                  model.common ? Annotation("common") : Container(),
+                  model.jlpt > 0 ? JLPTAnnotation(model.jlpt) : Container(),
                 ],
               ),
             ],

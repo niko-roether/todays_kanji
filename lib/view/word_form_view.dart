@@ -20,32 +20,48 @@ class WordFormView extends StatelessWidget {
       color: theme.textTheme.bodyText2.color.withOpacity(0.8),
     );
 
-    return Consumer<AppState>(builder: (context, state, child) {
-      Widget reading;
-      if (state.preferences.readingsAsRomaji) {
-        reading = Text(
-          "  \"${kanaToRomaji(model.reading)}\"",
-          style: readingStyle,
-        );
-      } else {
-        reading = JapaneseText("「${model.reading}」", style: readingStyle);
-      }
-      List<Widget> content = [];
-      if (model.word != null) {
-        content.add(JapaneseText(
-          model.word,
-          style: this.heading ? theme.textTheme.headline6 : null,
-        ));
-        if (model.reading != null) {
-          content.add(reading);
-        }
-      } else if (model.reading != null) {
-        content.add(reading);
-      }
-      return Wrap(
-        children: content,
-        crossAxisAlignment: WrapCrossAlignment.center,
-      );
-    });
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        model.word != null
+            ? JapaneseText(
+                model.word,
+                style: this.heading ? theme.textTheme.headline6 : null,
+              )
+            : Container(),
+        Consumer<AppState>(builder: (context, state, child) {
+          if (model.reading == null) return Container();
+          Widget reading;
+          if (state.preferences.readingsAsRomaji) {
+            reading = Text(
+              "  \"${kanaToRomaji(model.reading)}\"",
+              style: readingStyle,
+            );
+          } else {
+            reading = JapaneseText("「${model.reading}」", style: readingStyle);
+          }
+          return reading;
+        })
+      ],
+    );
+
+    // return Consumer<AppState>(builder: (context, state, child) {
+    //   List<Widget> content = [];
+    //   if (model.word != null) {
+    //     content.add(JapaneseText(
+    //       model.word,
+    //       style: this.heading ? theme.textTheme.headline6 : null,
+    //     ));
+    //     if (model.reading != null) {
+    //       content.add(reading);
+    //     }
+    //   } else if (model.reading != null) {
+    //     content.add(reading);
+    //   }
+    //   return Wrap(
+    //     children: content,
+    //     crossAxisAlignment: WrapCrossAlignment.center,
+    //   );
+    // });
   }
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todays_kanji/controller/preferences_controller.dart';
 import 'package:todays_kanji/model/preferences_model.dart';

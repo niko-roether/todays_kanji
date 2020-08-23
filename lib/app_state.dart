@@ -17,20 +17,4 @@ class AppState extends ChangeNotifier {
     _loadingKanji = value;
     notifyListeners();
   }
-
-  // Future<void> rerollKanjiSymbol() async {
-  //   loadingKanji = true;
-  //   notifyListeners();
-  //   preferences.kanjiTimestamp = todayTimestamp();
-  //   preferences.kanjiSymbol = await _kanjiSource.randomKanjiSymbol();
-  //   loadingKanji = false;
-  //   notifyListeners();
-  // }
-
-  // Future<void> updateKanjiSymbol() async {
-  //   int now = DateTime.now().millisecondsSinceEpoch;
-  //   int difference = now - preferences.kanjiTimestamp;
-  //   if (preferences.kanjiTimestamp == null || difference > 864000000)
-  //     rerollKanjiSymbol();
-  // }
 }

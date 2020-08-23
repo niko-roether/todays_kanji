@@ -30,7 +30,6 @@ class JLPTAnnotation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var color = Colors.lightGreen[(level / 5 * 7).floor() * 100];
     var theme = Theme.of(context);
     var color = theme.indicatorColor;
     return Annotation(

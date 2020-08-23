@@ -16,16 +16,6 @@ class WordSenseView extends StatelessWidget {
       definitionText += "【${model.appliesTo.join("、")}】";
     definitionText += model.definitions.join(", ");
 
-    // List<Widget> definition = model.url != null
-    //     ? [Weblink(text: definitionText, url: model.url)]
-    //     : [
-    //         Text(
-    //           definitionText,
-    //           maxLines: 3,
-    //           overflow: TextOverflow.ellipsis,
-    //         )
-    //       ];
-
     List<Widget> definition = [];
     if (model.url == null) {
       definition.add(Flexible(

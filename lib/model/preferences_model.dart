@@ -4,7 +4,7 @@ import "package:shared_preferences/shared_preferences.dart";
 class PreferencesModel extends ChangeNotifier {
   static const _DEFAULT_MAX_JLPT = 0;
   static const _DEFAULT_READINGS_AS_ROMAJI = false;
-  static const _DEFAULT_REFRESH_TIME = 0;
+  static const _DEFAULT_REFRESH_TIME = 180;
 
   final SharedPreferences _preferences;
 

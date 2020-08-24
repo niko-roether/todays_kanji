@@ -31,7 +31,7 @@ class PreferencesView extends StatelessWidget {
                   DropdownPreferenceItem(text: "N1", value: 1),
                   DropdownPreferenceItem(text: "None", value: 0),
                 ],
-                initial: model.maxJLPT,
+                value: model.maxJLPT,
                 onChanged: (value) => model.maxJLPT = value,
               )
             ],

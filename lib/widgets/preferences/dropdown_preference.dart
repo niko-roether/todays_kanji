@@ -4,20 +4,20 @@ import 'package:todays_kanji/widgets/preference.dart';
 class DropdownPreference<T> extends StatefulWidget {
   final String name;
   final List<DropdownPreferenceItem<T>> items;
-  final T initial;
+  final T value;
   final String placeholder;
   final void Function(T) onChanged;
   DropdownPreference({
     this.name,
     this.items,
-    this.initial,
+    this.value,
     this.placeholder,
     @required this.onChanged,
   });
 
   @override
   State<DropdownPreference> createState() {
-    return _DropdownPreferenceState(currentItem: initial, onChanged: onChanged);
+    return _DropdownPreferenceState(currentItem: value, onChanged: onChanged);
   }
 }
 

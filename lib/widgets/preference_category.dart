@@ -12,7 +12,7 @@ class PreferenceCategory extends StatelessWidget {
       Text(heading, style: theme.textTheme.headline6)
     ]..addAll(this.children);
     return Padding(
-      padding: EdgeInsets.all(8),
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 22),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: children,

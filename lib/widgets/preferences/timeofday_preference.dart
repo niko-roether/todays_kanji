@@ -41,6 +41,7 @@ class _TimeOfDayPreferenceState extends State<TimeOfDayPreference> {
           setState(() {
             current = newTime;
           });
+          widget.onChanged(newTime);
         },
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 5),

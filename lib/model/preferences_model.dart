@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import "package:shared_preferences/shared_preferences.dart";
 
 class PreferencesModel extends ChangeNotifier {
+  static const _DEFAULT_MAX_JLPT = 0;
+  static const _DEFAULT_READINGS_AS_ROMAJI = false;
+  static const _DEFAULT_REFRESH_TIME = 0;
+
   final SharedPreferences _preferences;
 
   PreferencesModel(this._preferences);
@@ -17,13 +21,15 @@ class PreferencesModel extends ChangeNotifier {
     _preferences.setInt("kanjiTimestamp", timestamp);
   }
 
-  int get maxJLPT => _preferences.getInt("maxJLPT") ?? (maxJLPT = 0);
+  int get maxJLPT =>
+      _preferences.getInt("maxJLPT") ?? (maxJLPT = _DEFAULT_MAX_JLPT);
   set maxJLPT(int value) {
     _preferences.setInt("maxJLPT", value);
   }
 
   bool get readingsAsRomaji =>
-      _preferences.getBool("readingsAsRomaji") ?? (readingsAsRomaji = false);
+      _preferences.getBool("readingsAsRomaji") ??
+      (readingsAsRomaji = _DEFAULT_READINGS_AS_ROMAJI);
   set readingsAsRomaji(bool value) {
     _preferences.setBool("readingsAsRomaji", value);
     notifyListeners();
@@ -31,6 +37,10 @@ class PreferencesModel extends ChangeNotifier {
 
   TimeOfDay get refreshTime {
     int minutes = _preferences.getInt("refreshTime");
+    if (minutes == null) {
+      minutes = _DEFAULT_REFRESH_TIME;
+      _preferences.setInt("refreshTime", minutes);
+    }
     return TimeOfDay(hour: (minutes / 60).floor(), minute: minutes % 60);
   }
 

@@ -5,6 +5,7 @@ import 'package:todays_kanji/util/general.dart';
 import 'package:todays_kanji/widgets/preference_category.dart';
 import 'package:todays_kanji/widgets/preferences/dropdown_preference.dart';
 import 'package:todays_kanji/widgets/preferences/switch_preference.dart';
+import 'package:todays_kanji/widgets/preferences/timeofday_preference.dart';
 
 class PreferencesView extends StatelessWidget {
   final PreferencesModel model;
@@ -33,6 +34,11 @@ class PreferencesView extends StatelessWidget {
                 ],
                 value: model.maxJLPT,
                 onChanged: (value) => model.maxJLPT = value,
+              ),
+              TimeOfDayPreference(
+                name: "Automatic Refresh Time",
+                value: model.refreshTime,
+                onChanged: (time) => model.refreshTime = time,
               )
             ],
           ),

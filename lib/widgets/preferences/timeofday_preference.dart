@@ -38,6 +38,7 @@ class _TimeOfDayPreferenceState extends State<TimeOfDayPreference> {
             context: context,
             initialTime: current,
           );
+          if (newTime == null) return;
           setState(() {
             current = newTime;
           });
@@ -52,8 +53,10 @@ class _TimeOfDayPreferenceState extends State<TimeOfDayPreference> {
           ),
           child: Row(children: [
             Text("$hour:$minute", style: theme.textTheme.subtitle1),
-            Icon(Icons.arrow_drop_down,
-                color: theme.iconTheme.color.withAlpha(165)) // TODO from theme
+            Icon(
+              Icons.arrow_drop_down,
+              color: theme.iconTheme.color.withAlpha(165),
+            ) // TODO from theme
           ]),
         ),
       ),

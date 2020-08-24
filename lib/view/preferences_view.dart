@@ -36,9 +36,9 @@ class PreferencesView extends StatelessWidget {
                 onChanged: (value) => model.maxJLPT = value,
               ),
               TimeOfDayPreference(
-                name: "Automatic Refresh Time",
-                value: model.refreshTime,
-                onChanged: (time) => model.refreshTime = time,
+                name: "Automatic Reroll Time",
+                value: model.rerollTime,
+                onChanged: (time) => model.rerollTime = time,
               )
             ],
           ),

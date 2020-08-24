@@ -35,17 +35,17 @@ class PreferencesModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  TimeOfDay get refreshTime {
-    int minutes = _preferences.getInt("refreshTime");
+  TimeOfDay get rerollTime {
+    int minutes = _preferences.getInt("rerollTime");
     if (minutes == null) {
       minutes = _DEFAULT_REFRESH_TIME;
-      _preferences.setInt("refreshTime", minutes);
+      _preferences.setInt("rerollTime", minutes);
     }
     return TimeOfDay(hour: (minutes / 60).floor(), minute: minutes % 60);
   }
 
-  set refreshTime(TimeOfDay value) {
-    _preferences.setInt("refreshTime", value.hour * 60 + value.minute);
+  set rerollTime(TimeOfDay value) {
+    _preferences.setInt("rerollTime", value.hour * 60 + value.minute);
   }
 
   Map toJson() {

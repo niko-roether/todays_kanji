@@ -23,8 +23,13 @@ class _TimeOfDayPreferenceState extends State<TimeOfDayPreference> {
   @override
   Widget build(BuildContext context) {
     // TODO add AM / PM
-    int hour = current.hour;
-    int minute = current.minute;
+    String hour = current.hour.toString();
+    while (hour.length < 2) hour = "0" + hour;
+    String minute = current.minute.toString();
+    while (minute.length < 2) minute = "0" + minute;
+
+    var theme = Theme.of(context);
+
     return Preference(
       name: widget.name,
       child: InkWell(
@@ -38,13 +43,17 @@ class _TimeOfDayPreferenceState extends State<TimeOfDayPreference> {
           });
         },
         child: Container(
+          padding: EdgeInsets.symmetric(vertical: 5),
           decoration: BoxDecoration(
             border: Border(
-              bottom:
-                  BorderSide(color: Theme.of(context).buttonColor, width: 2),
+              bottom: BorderSide(color: theme.buttonColor, width: 2),
             ),
           ),
-          child: Text("$hour:$minute"),
+          child: Row(children: [
+            Text("$hour:$minute", style: theme.textTheme.subtitle1),
+            Icon(Icons.arrow_drop_down,
+                color: theme.iconTheme.color.withAlpha(165)) // TODO from theme
+          ]),
         ),
       ),
     );

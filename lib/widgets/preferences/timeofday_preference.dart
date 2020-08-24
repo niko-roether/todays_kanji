@@ -53,10 +53,9 @@ class _TimeOfDayPreferenceState extends State<TimeOfDayPreference> {
           ),
           child: Row(children: [
             Text("$hour:$minute", style: theme.textTheme.subtitle1),
-            Icon(
-              Icons.arrow_drop_down,
-              color: theme.iconTheme.color.withAlpha(165),
-            ) // TODO from theme
+            Icon(Icons.arrow_drop_down,
+                color:
+                    Color.fromARGB(179, 255, 255, 255)) // TODO color from theme
           ]),
         ),
       ),

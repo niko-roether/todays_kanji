@@ -33,10 +33,11 @@ class KanjiUpdater extends InheritedWidget {
   }
 
   void _update() {
-    // TODO local time???
     int now = DateTime.now().millisecondsSinceEpoch;
-    if (_prefs.kanjiSymbol == null || now - _prefs.kanjiTimestamp > _DAY_LENGTH)
-      reroll();
+    int rerollTime =
+        _prefs.rerollTime.hour * 3600000 + _prefs.rerollTime.minute * 60000;
+    if (_prefs.kanjiSymbol == null ||
+        now - _prefs.kanjiTimestamp - rerollTime > _DAY_LENGTH) reroll();
   }
 
   static KanjiUpdater of(BuildContext context) {

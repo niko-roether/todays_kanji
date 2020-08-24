@@ -22,17 +22,20 @@ class PreferencesModel extends ChangeNotifier {
     _preferences.setInt("maxJLPT", value);
   }
 
-  int get rerollInterval =>
-      _preferences.getInt("rerollInterval") ?? (rerollInterval = 86400000);
-  set rerollInterval(int value) {
-    _preferences.setInt("rerollInterval", value);
-  }
-
   bool get readingsAsRomaji =>
       _preferences.getBool("readingsAsRomaji") ?? (readingsAsRomaji = false);
   set readingsAsRomaji(bool value) {
     _preferences.setBool("readingsAsRomaji", value);
     notifyListeners();
+  }
+
+  TimeOfDay get refreshTime {
+    int minutes = _preferences.getInt("refreshTime");
+    return TimeOfDay(hour: (minutes / 60).floor(), minute: minutes % 60);
+  }
+
+  set refreshTime(TimeOfDay value) {
+    _preferences.setInt("refreshTime", value.hour * 60 + value.minute);
   }
 
   Map toJson() {

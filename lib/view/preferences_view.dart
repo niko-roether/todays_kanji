@@ -32,7 +32,7 @@ class PreferencesView extends StatelessWidget {
                   DropdownPreferenceItem(text: "None", value: 0),
                 ],
                 initial: model.maxJLPT,
-                onChanged: (value) => controller.setMaxJLPT(value),
+                onChanged: (value) => model.maxJLPT = value,
               )
             ],
           ),
@@ -42,7 +42,7 @@ class PreferencesView extends StatelessWidget {
               SwitchPreference(
                 name: "Show readings as Romaji",
                 initial: model.readingsAsRomaji,
-                onChanged: (value) => controller.setReadingsAsRomaji(value),
+                onChanged: (value) => model.readingsAsRomaji = value,
               )
             ],
           ),

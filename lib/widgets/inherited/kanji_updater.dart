@@ -8,7 +8,7 @@ import 'package:todays_kanji/util/general.dart';
 
 // ignore: must_be_immutable
 class KanjiUpdater extends InheritedWidget {
-  static const _DAY_LENGTH_MILLISEC = 86400000;
+  static const _DAY_LENGTH = 86400000; // in milliseconds
   static const _CHECK_INTERVAL = Duration(seconds: 1);
   final AppState _appState;
   final _kanjiSource = KanjiSource();
@@ -33,9 +33,10 @@ class KanjiUpdater extends InheritedWidget {
   }
 
   void _update() {
+    // TODO local time???
     int now = DateTime.now().millisecondsSinceEpoch;
-    if (_prefs.kanjiSymbol == null ||
-        now - _prefs.kanjiTimestamp > _DAY_LENGTH_MILLISEC) reroll();
+    if (_prefs.kanjiSymbol == null || now - _prefs.kanjiTimestamp > _DAY_LENGTH)
+      reroll();
   }
 
   static KanjiUpdater of(BuildContext context) {

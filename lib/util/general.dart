@@ -6,8 +6,11 @@ import 'package:todays_kanji/util/kana_romaji_mapping.dart';
 T cast<T>(x) => x is T ? x : null;
 
 int todayTimestamp() {
-  var now = DateTime.now().millisecondsSinceEpoch;
-  return now - now % 86400000;
+  var now = DateTime.now();
+  int nowTimestamp = now.millisecondsSinceEpoch;
+  return nowTimestamp -
+      nowTimestamp % 86400000 -
+      now.timeZoneOffset.inMilliseconds;
 }
 
 void showError(BuildContext context, String text, {void Function() onClose}) {

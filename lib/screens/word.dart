@@ -42,7 +42,10 @@ class WordScreen extends StatelessWidget {
         appBar: DefaultAppBar(header: Text("View Word")),
         body: SizedBox.expand(
           child: ContentLoader<WordModel>(
-            future: modelFuture,
+            futureCallback: () => kanjiSource.getWord(
+              args.word,
+              pronunciation: args.pronunciation,
+            ),
             builder: (context, model) {
               return LargeWordView(model);
             },

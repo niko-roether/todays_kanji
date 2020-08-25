@@ -96,35 +96,35 @@ class LargeWordView extends StatelessWidget {
             ),
           );
         }),
-        Builder(builder: (context) {
-          List<Future<KanjiModel>> futures = model.forms
-              .map((e) => e.word)
-              .join("")
-              .split("")
-              .toSet()
-              .where((char) => isKanji(char))
-              .map((e) => kanjiSource.getKanji(e))
-              .toList();
-          return InfoCard(
-            heading: "Kanji",
-            contentIndent: 20,
-            child: ContentLoader(
-              future: Future.wait(futures),
-              builder: (context, List<KanjiModel> models) {
-                return Column(
-                  children: models
-                      .map(
-                        (e) => Padding(
-                          padding: EdgeInsets.only(bottom: 16),
-                          child: KanjiView(e),
-                        ),
-                      )
-                      .toList(),
-                );
-              },
-            ),
-          );
-        })
+        InfoCard(
+          heading: "Kanji",
+          contentIndent: 20,
+          child: ContentLoader(
+            futureCallback: () {
+              List<Future<KanjiModel>> futures = model.forms
+                  .map((e) => e.word)
+                  .join("")
+                  .split("")
+                  .toSet()
+                  .where((char) => isKanji(char))
+                  .map((e) => kanjiSource.getKanji(e))
+                  .toList();
+              return Future.wait(futures);
+            },
+            builder: (context, List<KanjiModel> models) {
+              return Column(
+                children: models
+                    .map(
+                      (e) => Padding(
+                        padding: EdgeInsets.only(bottom: 16),
+                        child: KanjiView(e),
+                      ),
+                    )
+                    .toList(),
+              );
+            },
+          ),
+        ),
       ],
     );
   }

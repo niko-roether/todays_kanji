@@ -30,15 +30,13 @@ class _TodaysKanjiTabState extends State<TodaysKanjiTab>
       builder: (context, state, child) {
         PreferencesModel prefs = state.preferences;
         if (state.loadingKanji) return LoadingIndicator();
-        Future<KanjiModel> modelFuture =
-            _kanjiSource.getKanji(prefs.kanjiSymbol);
         return ContentLoader<KanjiModel>(
-            future: modelFuture,
-            builder: (context, KanjiModel data) {
-              if (data == null) return Container();
-              return LargeKanjiView(data, canReroll: true);
-            },
-            reload: () => setState(() {}));
+          futureCallback: () => _kanjiSource.getKanji(prefs.kanjiSymbol),
+          builder: (context, KanjiModel data) {
+            if (data == null) return Container();
+            return LargeKanjiView(data, canReroll: true);
+          },
+        );
       },
     );
   }

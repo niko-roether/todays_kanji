@@ -72,7 +72,7 @@ class LargeKanjiView extends StatelessWidget {
           contentIndent: 20,
           heading: "Radical",
           child: ContentLoader<KanjiModel>(
-            future: kanjiSource.getKanji(model.radical),
+            futureCallback: () => kanjiSource.getKanji(model.radical),
             builder: (context, radical) {
               return Padding(
                 padding: EdgeInsets.only(bottom: 8),

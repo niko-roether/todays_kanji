@@ -26,15 +26,13 @@ class KanjiScreen extends StatelessWidget {
       return Container();
     }
 
-    Future<KanjiModel> modelFuture = kanjiSource.getKanji(kanjiSymbol);
-
     return ScrollConfiguration(
       behavior: RubberBandScroll(),
       child: Scaffold(
         appBar: DefaultAppBar(header: Text("View Kanji")),
         body: SizedBox.expand(
           child: ContentLoader<KanjiModel>(
-            future: modelFuture,
+            futureCallback: () => kanjiSource.getKanji(kanjiSymbol),
             builder: (context, model) {
               return LargeKanjiView(model);
             },

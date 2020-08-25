@@ -31,11 +31,6 @@ class WordScreen extends StatelessWidget {
       return Container();
     }
 
-    Future<WordModel> modelFuture = kanjiSource.getWord(
-      args.word,
-      pronunciation: args.pronunciation,
-    );
-
     return ScrollConfiguration(
       behavior: RubberBandScroll(),
       child: Scaffold(

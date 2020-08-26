@@ -6,6 +6,7 @@ import 'package:todays_kanji/util/general.dart';
 import 'package:todays_kanji/view/kanji_view.dart';
 import 'package:todays_kanji/view/word_view.dart';
 import 'package:todays_kanji/widgets/annotation.dart';
+import 'package:todays_kanji/widgets/annotations/jlpt_annotation.dart';
 import 'package:todays_kanji/widgets/content_loader.dart';
 import 'package:todays_kanji/widgets/info_card.dart';
 import 'package:todays_kanji/widgets/inherited/kanji_updater.dart';

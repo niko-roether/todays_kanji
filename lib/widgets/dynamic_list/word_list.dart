@@ -3,7 +3,7 @@ import 'package:todays_kanji/data_source/kanji_source.dart';
 import 'package:todays_kanji/view/word_view.dart';
 import 'package:todays_kanji/widgets/dynamic_list.dart';
 
-import 'info_card.dart';
+import '../info_card.dart';
 
 class WordList extends StatelessWidget {
   final String query;

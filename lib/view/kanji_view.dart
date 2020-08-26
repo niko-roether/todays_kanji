@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todays_kanji/model/kanji_model.dart';
 import 'package:todays_kanji/widgets/annotation.dart';
+import 'package:todays_kanji/widgets/annotations/jlpt_annotation.dart';
 import 'package:todays_kanji/widgets/japanese_text.dart';
 
 class KanjiView extends StatelessWidget {

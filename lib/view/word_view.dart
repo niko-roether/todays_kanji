@@ -8,6 +8,7 @@ import 'package:todays_kanji/util/general.dart';
 import 'package:todays_kanji/view/word_form_view.dart';
 import 'package:todays_kanji/view/word_sense_view.dart';
 import 'package:todays_kanji/widgets/annotation.dart';
+import 'package:todays_kanji/widgets/annotations/jlpt_annotation.dart';
 
 class WordView extends StatelessWidget {
   final WordModel model;

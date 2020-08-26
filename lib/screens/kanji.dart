@@ -6,6 +6,12 @@ import 'package:todays_kanji/view/large_kanji_view.dart';
 import 'package:todays_kanji/widgets/content_loader.dart';
 import 'package:todays_kanji/widgets/default_app_bar.dart';
 
+class KanjiScreenArguments {
+  final String kanji;
+
+  KanjiScreenArguments({this.kanji});
+}
+
 class KanjiScreen extends StatelessWidget {
   static const ROUTENAME = "/kanji";
 
@@ -14,13 +20,14 @@ class KanjiScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //Maybe add option to use KanjiModel instead of String?
-    final String kanjiSymbol =
-        cast<String>(ModalRoute.of(context).settings.arguments);
+    final KanjiScreenArguments args =
+        cast<KanjiScreenArguments>(ModalRoute.of(context).settings.arguments);
 
-    if (kanjiSymbol == null) {
+    // TODO export to other class?
+    if (args == null) {
       showError(
         context,
-        "The supplied kanji symbol was null or of invalid type",
+        "The supplied arguments were null or of invalid type",
         onClose: () => Navigator.pop(context),
       );
       return Container();
@@ -32,7 +39,7 @@ class KanjiScreen extends StatelessWidget {
         appBar: DefaultAppBar(header: Text("View Kanji")),
         body: SizedBox.expand(
           child: ContentLoader<KanjiModel>(
-            futureCallback: () => kanjiSource.getKanji(kanjiSymbol),
+            futureCallback: () => kanjiSource.getKanji(args.kanji),
             builder: (context, model) {
               return LargeKanjiView(model);
             },

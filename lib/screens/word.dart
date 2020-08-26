@@ -10,7 +10,8 @@ class WordScreenArguments {
   final String word;
   final String pronunciation;
 
-  WordScreenArguments(this.word, this.pronunciation);
+  WordScreenArguments({@required this.word, this.pronunciation})
+      : assert(word != null);
 }
 
 class WordScreen extends StatelessWidget {

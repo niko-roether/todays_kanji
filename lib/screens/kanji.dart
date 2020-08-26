@@ -9,7 +9,7 @@ import 'package:todays_kanji/widgets/default_app_bar.dart';
 class KanjiScreenArguments {
   final String kanji;
 
-  KanjiScreenArguments({this.kanji});
+  KanjiScreenArguments({@required this.kanji}) : assert(kanji != null);
 }
 
 class KanjiScreen extends StatelessWidget {

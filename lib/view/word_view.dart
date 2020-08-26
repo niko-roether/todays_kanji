@@ -86,8 +86,8 @@ class WordView extends StatelessWidget {
           context,
           "/word",
           arguments: WordScreenArguments(
-            mainForm.word,
-            katakanaToHiragana(mainForm.reading),
+            word: mainForm.word,
+            pronunciation: katakanaToHiragana(mainForm.reading),
           ),
           // arguments: "${mainForm.word} ${katakanaToHiragana(mainForm.reading)}",
         );

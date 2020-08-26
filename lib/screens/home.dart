@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 import 'package:todays_kanji/kanji_icons.dart';
 import 'package:todays_kanji/util/general.dart';
-import 'package:todays_kanji/widgets/tabs/todayskanji.dart';
-import 'package:todays_kanji/widgets/tabs/words.dart';
+import 'package:todays_kanji/screens/home/todayskanji.dart';
+import 'package:todays_kanji/screens/home/words.dart';
 import 'package:todays_kanji/widgets/settings_button.dart';
 
 class HomeScreen extends StatelessWidget {

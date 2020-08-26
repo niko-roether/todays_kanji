@@ -41,7 +41,7 @@ class KanjiView extends StatelessWidget {
       ),
       onTap: () => Navigator.pushNamed(
         context,
-        "/kanji",
+        KanjiScreen.ROUTENAME,
         arguments: KanjiScreenArguments(kanji: model.character),
       ),
     );

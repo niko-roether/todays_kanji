@@ -84,7 +84,7 @@ class WordView extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          "/word",
+          WordScreen.ROUTENAME,
           arguments: WordScreenArguments(
             word: mainForm.word,
             pronunciation: katakanaToHiragana(mainForm.reading),

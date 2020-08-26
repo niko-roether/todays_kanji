@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todays_kanji/app_state.dart';
-import 'package:todays_kanji/widgets/dynamic_list/word_list.dart';
+import 'package:todays_kanji/widgets/dynamic_lists/word_list.dart';
 
 class WordsTab extends StatefulWidget {
   @override

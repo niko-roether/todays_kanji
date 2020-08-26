@@ -23,7 +23,7 @@ class _WordsTabState extends State<WordsTab>
   final _kanjiSource = KanjiSource();
   final _controller = ScrollController();
   List<WordView> _words = [];
-  int loadedPages = 0;
+  int _loadedPages = 0;
   bool _loading = false;
   String _loadedKanji;
 
@@ -32,8 +32,8 @@ class _WordsTabState extends State<WordsTab>
     bool readingsAsRomaji = false,
   }) async {
     List<WordModel> models =
-        await _kanjiSource.searchWords("*$character*", page: loadedPages);
-    loadedPages++;
+        await _kanjiSource.searchWords("*$character*", page: _loadedPages);
+    _loadedPages++;
     return models.map<WordView>((e) => WordView(e)).toList();
   }
 
@@ -69,6 +69,7 @@ class _WordsTabState extends State<WordsTab>
         var character = state.preferences.kanjiSymbol;
         if (!_loading && (_loadedKanji != character || _words.length == 0)) {
           _words = [];
+          _loadedPages = 0;
           _loading = true;
           _fetchWords(character,
                   readingsAsRomaji: state.preferences.readingsAsRomaji)

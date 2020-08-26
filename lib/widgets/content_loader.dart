@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'loading_indicator.dart';
 
-typedef ContentLoaderBuilder<T> = Widget Function(BuildContext, T);
+typedef ContentLoaderBuilder<T> = Widget Function(
+    BuildContext context, T value);
 typedef FutureCallback<T> = Future<T> Function();
 
 class ContentLoader<T> extends StatefulWidget {

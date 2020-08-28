@@ -45,6 +45,7 @@ class _ContentLoaderState<T> extends State<ContentLoader> {
 
   @override
   Widget build(BuildContext context) {
+    _load();
     return FutureBuilder<T>(
       future: _future,
       builder: (context, snapshot) {

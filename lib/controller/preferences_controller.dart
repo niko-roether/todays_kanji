@@ -9,4 +9,8 @@ class PreferencesController {
     model.kanjiTimestamp = todayTimestamp();
     model.kanjiSymbol = kanji;
   }
+
+  void addWordSearch(String query) {
+    model.recentWordSearches.add(query);
+  }
 }

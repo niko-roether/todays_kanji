@@ -5,6 +5,7 @@ import 'package:todays_kanji/model/word_form_model.dart';
 import 'package:todays_kanji/model/word_model.dart';
 import 'package:todays_kanji/model/word_sense_model.dart';
 import 'package:todays_kanji/util/errors.dart';
+import 'package:todays_kanji/util/general.dart';
 import 'package:unofficial_jisho_api/api.dart' as jisho;
 import "package:todays_kanji/util/jisho_helper.dart" as jishoHelper;
 

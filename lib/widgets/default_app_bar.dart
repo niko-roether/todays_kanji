@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todays_kanji/widgets/search_button.dart';
+import 'package:todays_kanji/widgets/search_buttons/word_search_button.dart';
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget header;
@@ -11,7 +12,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: header,
       centerTitle: true,
       actions: [
-        SearchButton(),
+        WordSearchButton(),
         IconButton(
           icon: Icon(Icons.home),
           onPressed: () =>

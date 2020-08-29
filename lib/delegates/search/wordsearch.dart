@@ -4,7 +4,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:todays_kanji/delegates/search.dart';
-import 'package:todays_kanji/model/preferences_model.dart';
 import 'package:todays_kanji/model/word_form_model.dart';
 import 'package:todays_kanji/model/word_model.dart';
 import 'package:todays_kanji/model/word_sense_model.dart';
@@ -13,7 +12,7 @@ import 'package:todays_kanji/widgets/dynamic_lists/word_list.dart';
 
 class WordSearch extends Search {
   final kanjiSource = KanjiSource();
-  final List<String> recent = [];
+  static final List<String> recent = [];
 
   WordSearch({String initial = ""}) : super(initial: initial);
 
@@ -50,4 +49,7 @@ class WordSearch extends Search {
     recent.insert(0, query);
     while (recent.length > 4) recent.removeLast();
   }
+
+  @override
+  List<String> getRecent() => recent;
 }

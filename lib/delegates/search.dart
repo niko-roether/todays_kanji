@@ -10,18 +10,14 @@ typedef SearchResultBuilder = Widget Function(
 typedef SearchSuggestionFetcher = FutureOr<List<String>> Function(String query);
 
 abstract class Search extends SearchDelegate {
-  final List<String> recent;
   final String initial;
 
-  Search({
-    this.initial = "",
-    this.recent = const [],
-  })  : assert(recent != null),
-        assert(initial != null) {
+  Search({this.initial = ""}) : assert(initial != null) {
     query = initial;
   }
 
   FutureOr<List<String>> fetchSuggestions();
+  List<String> getRecent();
 
   void addRecentSearch(String query);
 
@@ -77,7 +73,7 @@ abstract class Search extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     List<Widget> suggestions =
-        _createListItemsFromStrings(context, recent, Icons.access_time);
+        _createListItemsFromStrings(context, getRecent(), Icons.access_time);
     if (query.isNotEmpty) {
       suggestions.add(ContentLoader<List<String>>(
         futureCallback: () => fetchSuggestions(),

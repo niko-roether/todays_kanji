@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import "package:http/http.dart" as http;
 import 'package:unofficial_jisho_api/api.dart';
-import 'package:unofficial_jisho_api/src/phraseSearch.dart';
 import 'package:todays_kanji/util/errors.dart';
+import 'package:unofficial_jisho_api/parser.dart';
 
 const _BASE_URL = "https://jisho.org/search/";
 const RESULTS_PER_PAGE = 20;
@@ -54,7 +54,6 @@ Future<ResultPage<JishoResult>> wordSearch(
   if (page > 0) query += "&page=${page + 1}";
   final res = await http.get(query);
   if (res.statusCode != 200) throw WordNotFoundError("$query (page $page)");
-  // TODO what about numResults?
   return ResultPage(
     results: JishoAPIResult.fromJson(jsonDecode(res.body)).data,
   );

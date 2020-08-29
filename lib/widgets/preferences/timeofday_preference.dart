@@ -21,7 +21,6 @@ class _TimeOfDayPreferenceState extends State<TimeOfDayPreference> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO add AM / PM
     String hour = current.hour.toString();
     while (hour.length < 2) hour = "0" + hour;
     String minute = current.minute.toString();

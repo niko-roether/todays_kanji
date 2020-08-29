@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todays_kanji/main.dart';
 import 'package:todays_kanji/model/word_form_model.dart';
 import 'package:todays_kanji/model/word_model.dart';
 import 'package:todays_kanji/model/word_sense_model.dart';

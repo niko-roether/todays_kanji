@@ -107,11 +107,9 @@ class LargeKanjiView extends StatelessWidget {
                         return LoadingIndicator();
                       },
                       errorBuilder: (context, error, stackTrace) {
-                        //TODO alt load diagram?
                         return Text("Failed to load stroke order gif.");
                       },
                     ),
-                    // TODO add alternatives
                   ],
                 ),
               ),

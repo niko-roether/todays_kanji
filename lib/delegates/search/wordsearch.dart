@@ -1,4 +1,3 @@
-import 'package:todays_kanji/controller/preferences_controller.dart';
 import 'package:todays_kanji/data_source/kanji_source.dart';
 import 'dart:async';
 

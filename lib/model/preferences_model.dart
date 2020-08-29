@@ -48,12 +48,6 @@ class PreferencesModel extends ChangeNotifier {
     _preferences.setInt("rerollTime", value.hour * 60 + value.minute);
   }
 
-  List<String> get recentWordSearches =>
-      _preferences.getStringList("recentWordSearches") ?? [];
-  set recentWordSearches(List<String> value) {
-    _preferences.setStringList("recentWordSearches", value);
-  }
-
   Map toJson() {
     Map json = {};
     for (String key in this._preferences.getKeys()) {

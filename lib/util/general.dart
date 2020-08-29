@@ -75,3 +75,9 @@ String kanaToRomaji(String kana) {
   }
   return romaji;
 }
+
+List<T> removeDuplicates<T>(List<T> list) {
+  return [
+    ...{...list}
+  ];
+}

@@ -1,3 +1,4 @@
+import 'package:todays_kanji/controller/preferences_controller.dart';
 import 'package:todays_kanji/data_source/kanji_source.dart';
 import 'dart:async';
 
@@ -13,9 +14,10 @@ import 'package:todays_kanji/widgets/loading_indicator.dart';
 
 class WordSearch extends Search {
   final kanjiSource = KanjiSource();
-  final void Function(String query) addRecent;
+  final PreferencesController prefController;
 
-  WordSearch({String initial = "", this.addRecent}) : super(initial: initial);
+  WordSearch({String initial = "", this.prefController})
+      : super(initial: initial);
 
   List<String> _getSuggestableTerms(WordModel model) {
     List<String> terms = [];
@@ -45,6 +47,6 @@ class WordSearch extends Search {
 
   @override
   void addRecentSearch(String query) {
-    if (this.addRecent != null) this.addRecent(query);
+    if (prefController != null) prefController.addWordSearch(query);
   }
 }

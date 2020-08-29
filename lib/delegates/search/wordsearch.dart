@@ -10,14 +10,12 @@ import 'package:todays_kanji/model/word_model.dart';
 import 'package:todays_kanji/model/word_sense_model.dart';
 import 'package:todays_kanji/util/general.dart';
 import 'package:todays_kanji/widgets/dynamic_lists/word_list.dart';
-import 'package:todays_kanji/widgets/loading_indicator.dart';
 
 class WordSearch extends Search {
   final kanjiSource = KanjiSource();
-  final PreferencesController prefController;
+  final List<String> recent = [];
 
-  WordSearch({String initial = "", this.prefController})
-      : super(initial: initial);
+  WordSearch({String initial = ""}) : super(initial: initial);
 
   List<String> _getSuggestableTerms(WordModel model) {
     List<String> terms = [];
@@ -32,6 +30,7 @@ class WordSearch extends Search {
 
   @override
   Widget buildResults(BuildContext context) {
+    super.buildResults(context);
     return SizedBox.expand(child: WordList(query: query));
   }
 
@@ -47,6 +46,8 @@ class WordSearch extends Search {
 
   @override
   void addRecentSearch(String query) {
-    if (prefController != null) prefController.addWordSearch(query);
+    if (query.isEmpty) return;
+    recent.insert(0, query);
+    while (recent.length > 4) recent.removeLast();
   }
 }

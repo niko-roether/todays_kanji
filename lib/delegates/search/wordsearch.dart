@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:todays_kanji/delegates/search.dart';
+import 'package:todays_kanji/model/preferences_model.dart';
 import 'package:todays_kanji/model/word_form_model.dart';
 import 'package:todays_kanji/model/word_model.dart';
 import 'package:todays_kanji/model/word_sense_model.dart';
@@ -12,8 +13,9 @@ import 'package:todays_kanji/widgets/loading_indicator.dart';
 
 class WordSearch extends Search {
   final kanjiSource = KanjiSource();
+  final void Function(String query) addRecent;
 
-  WordSearch({String initial = ""}) : super(initial: initial);
+  WordSearch({String initial = "", this.addRecent}) : super(initial: initial);
 
   List<String> _getSuggestableTerms(WordModel model) {
     List<String> terms = [];
@@ -43,6 +45,6 @@ class WordSearch extends Search {
 
   @override
   void addRecentSearch(String query) {
-    // TODO: implement addRecentSearch
+    if (this.addRecent != null) this.addRecent(query);
   }
 }

@@ -68,6 +68,13 @@ abstract class Search extends SearchDelegate {
   }
 
   @override
+  @mustCallSuper
+  Widget buildResults(BuildContext context) {
+    addRecentSearch(query);
+    return Container();
+  }
+
+  @override
   Widget buildSuggestions(BuildContext context) {
     List<Widget> suggestions =
         _createListItemsFromStrings(context, recent, Icons.access_time);

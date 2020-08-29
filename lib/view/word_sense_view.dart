@@ -10,7 +10,7 @@ class WordSenseView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    var numStr = "($senseIndex)";
+    String numStr = (senseIndex + 1).toString();
     var definitionText = "";
     if (model.appliesTo != null && model.appliesTo.length > 0)
       definitionText += "【${model.appliesTo.join("、")}】";

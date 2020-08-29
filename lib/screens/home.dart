@@ -3,6 +3,7 @@ import 'package:todays_kanji/kanji_icons.dart';
 import 'package:todays_kanji/util/general.dart';
 import 'package:todays_kanji/screens/home/todayskanji.dart';
 import 'package:todays_kanji/screens/home/words.dart';
+import 'package:todays_kanji/widgets/search_buttons/word_search_button.dart';
 import 'package:todays_kanji/widgets/settings_button.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -23,7 +24,10 @@ class HomeScreen extends StatelessWidget {
           appBar: AppBar(
             title: Text("Today's Kanji"),
             centerTitle: true,
-            actions: [SettingsButton()],
+            actions: [
+              WordSearchButton(),
+              SettingsButton(),
+            ],
             bottom: TabBar(
               tabs: tabs,
             ),

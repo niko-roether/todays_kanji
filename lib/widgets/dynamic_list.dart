@@ -28,8 +28,9 @@ class _DynamicListState extends State<DynamicList> {
   @override
   void initState() {
     _controller.addListener(() async {
-      if (_controller.position.pixels >
-          _controller.position.maxScrollExtent + _LOAD_OVERSCROLL) {
+      if (!_loading &&
+          _controller.position.pixels >
+              _controller.position.maxScrollExtent + _LOAD_OVERSCROLL) {
         setState(() => _loading = true);
         Widget item = await loader(context, _items.length);
         setState(() {

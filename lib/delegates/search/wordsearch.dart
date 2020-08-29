@@ -12,7 +12,7 @@ import 'package:todays_kanji/widgets/dynamic_lists/word_list.dart';
 
 class WordSearch extends Search {
   final kanjiSource = KanjiSource();
-  static final List<String> recent = [];
+  static List<String> recent = <String>[];
 
   WordSearch({String initial = ""}) : super(initial: initial);
 
@@ -51,5 +51,7 @@ class WordSearch extends Search {
   }
 
   @override
-  List<String> getRecent() => recent;
+  List<String> getRecent() {
+    return recent;
+  }
 }

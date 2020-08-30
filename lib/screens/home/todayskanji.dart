@@ -32,7 +32,7 @@ class _TodaysKanjiTabState extends State<TodaysKanjiTab>
           futureCallback: () => _kanjiSource.getKanji(prefs.kanjiSymbol),
           builder: (context, KanjiModel data) {
             if (data == null) return Container();
-            return LargeKanjiView(data, canReroll: true);
+            return LargeKanjiView(data, isMain: true);
           },
         );
       },

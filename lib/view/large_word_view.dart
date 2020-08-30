@@ -17,6 +17,7 @@ import 'package:todays_kanji/widgets/large_view_layout.dart';
 import '../app_state.dart';
 import 'kanji_view.dart';
 
+// TODO extract widgets
 class LargeWordView extends StatelessWidget {
   final WordModel model;
   final kanjiSource = KanjiSource();

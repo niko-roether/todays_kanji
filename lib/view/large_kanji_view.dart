@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todays_kanji/data_source/kanji_source.dart';
 import 'package:todays_kanji/model/kanji_model.dart';
+import 'package:todays_kanji/screens/word_list.dart';
 import 'package:todays_kanji/util/general.dart';
 import 'package:todays_kanji/view/kanji_view.dart';
 import 'package:todays_kanji/view/word_view.dart';
@@ -16,11 +17,12 @@ import 'package:todays_kanji/widgets/loading_indicator.dart';
 
 import '../app_state.dart';
 
+// TODO extract widgets
 class LargeKanjiView extends StatelessWidget {
   final KanjiModel model;
-  final bool canReroll;
+  final bool isMain;
   final kanjiSource = KanjiSource();
-  LargeKanjiView(this.model, {this.canReroll = false});
+  LargeKanjiView(this.model, {this.isMain = false});
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +133,22 @@ class LargeKanjiView extends StatelessWidget {
             heading: "Examples",
             contentIndent: 20,
             child: Column(
-              children: wordList,
+              children: [
+                ...wordList,
+                isMain
+                    ? Container()
+                    : FlatButton(
+                        color: theme.accentColor,
+                        textColor: theme.accentTextTheme.bodyText2.color,
+                        child: Text("More Words"),
+                        onPressed: () => Navigator.pushNamed(
+                          context,
+                          WordListScreen.ROUTENAME,
+                          arguments:
+                              WordListArguments(query: "*${model.character}*"),
+                        ),
+                      )
+              ],
             ),
           );
         }),
@@ -139,7 +156,7 @@ class LargeKanjiView extends StatelessWidget {
       stackItems: [
         Builder(
           builder: (context) {
-            if (!canReroll) return Container();
+            if (!isMain) return Container();
             return IconButton(
               icon: Icon(Icons.refresh),
               tooltip: "Reroll Kanji",

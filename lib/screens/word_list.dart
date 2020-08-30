@@ -7,7 +7,7 @@ import 'package:todays_kanji/widgets/screen.dart';
 class WordListArguments {
   final String query;
 
-  WordListArguments(this.query);
+  WordListArguments({@required this.query}) : assert(query != null);
 }
 
 class WordListScreen extends StatelessWidget

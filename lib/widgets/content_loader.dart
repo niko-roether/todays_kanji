@@ -17,7 +17,8 @@ class ContentLoader<T> extends StatefulWidget {
       _ContentLoaderState<T>(builder, futureCallback);
 }
 
-class _ContentLoaderState<T> extends State<ContentLoader> {
+class _ContentLoaderState<T> extends State<ContentLoader>
+    with AutomaticKeepAliveClientMixin {
   final ContentLoaderBuilder<T> builder;
   final FutureCallback<T> futureCallback;
   Future<T> _future;
@@ -45,6 +46,7 @@ class _ContentLoaderState<T> extends State<ContentLoader> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     _load();
     return FutureBuilder<T>(
       future: _future,
@@ -63,44 +65,7 @@ class _ContentLoaderState<T> extends State<ContentLoader> {
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
-
-// class ContentLoader<T> extends StatelessWidget {
-//   final Future<T> future;
-//   final ContentLoaderBuilder<T> builder;
-//   final void Function() reload;
-//   ContentLoader({
-//     @required this.future,
-//     @required this.builder,
-//     this.reload,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return FutureBuilder<T>(
-//       future: future,
-//       builder: (BuildContext context, AsyncSnapshot<T> snapshot) {
-//         switch (snapshot.connectionState) {
-//           case ConnectionState.waiting:
-//             return Center(child: LoadingIndicator());
-//           case ConnectionState.done:
-//             if (snapshot.hasError) {
-//               return Column(
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 children: [
-//                   Text("Failed to Load"),
-//                   FlatButton(
-//                     child: Text("RETRY"),
-//                     onPressed: () => reload(),
-//                   )
-//                 ],
-//               );
-//             }
-//             return builder(context, snapshot.data);
-//           default:
-//             return Text("Unknown Error");
-//         }
-//       },
-//     );
-//   }
-// }

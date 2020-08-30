@@ -35,6 +35,7 @@ abstract class Search extends SearchDelegate {
           Icons.call_made,
           textDirection: TextDirection.rtl,
         ),
+        tooltip: "To Searchbar",
         onPressed: () => query = text,
       ),
     );
@@ -52,7 +53,13 @@ abstract class Search extends SearchDelegate {
 
   @override
   List<Widget> buildActions(BuildContext context) {
-    return [IconButton(icon: Icon(Icons.clear), onPressed: () => query = "")];
+    return [
+      IconButton(
+        icon: Icon(Icons.clear),
+        onPressed: () => query = "",
+        tooltip: "Clear Searchbar",
+      )
+    ];
   }
 
   @override
@@ -60,6 +67,7 @@ abstract class Search extends SearchDelegate {
     return IconButton(
       icon: BackButtonIcon(),
       onPressed: () => close(context, null),
+      tooltip: "Back",
     );
   }
 

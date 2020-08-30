@@ -9,6 +9,7 @@ class SearchButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       icon: Icon(Icons.search),
+      tooltip: "Search Word",
       onPressed: () => showSearch(context: context, delegate: searchDelegate),
     );
   }

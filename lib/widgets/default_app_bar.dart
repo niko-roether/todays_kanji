@@ -14,6 +14,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
         WordSearchButton(),
         IconButton(
           icon: Icon(Icons.home),
+          tooltip: "Return to Home",
           onPressed: () =>
               Navigator.popUntil(context, (route) => route.isFirst),
         )

@@ -142,6 +142,7 @@ class LargeKanjiView extends StatelessWidget {
             if (!canReroll) return Container();
             return IconButton(
               icon: Icon(Icons.refresh),
+              tooltip: "Reroll Kanji",
               onPressed: () {
                 showDialog(
                   context: context,

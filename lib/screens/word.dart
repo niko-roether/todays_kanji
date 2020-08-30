@@ -5,6 +5,8 @@ import 'package:todays_kanji/util/general.dart';
 import 'package:todays_kanji/view/large_word_view.dart';
 import 'package:todays_kanji/widgets/content_loader.dart';
 import 'package:todays_kanji/widgets/default_app_bar.dart';
+import 'package:todays_kanji/util/dynamic_screen.dart';
+import 'package:todays_kanji/widgets/screen.dart';
 
 class WordScreenArguments {
   final String word;
@@ -14,7 +16,8 @@ class WordScreenArguments {
       : assert(word != null);
 }
 
-class WordScreen extends StatelessWidget {
+class WordScreen extends StatelessWidget
+    with DynamicScreen<WordScreenArguments> {
   static const ROUTENAME = "/word";
   final kanjiSource = KanjiSource();
 
@@ -32,21 +35,16 @@ class WordScreen extends StatelessWidget {
       return Container();
     }
 
-    return ScrollConfiguration(
-      behavior: RubberBandScroll(),
-      child: Scaffold(
-        appBar: DefaultAppBar(header: Text("View Word")),
-        body: SizedBox.expand(
-          child: ContentLoader<WordModel>(
-            futureCallback: () => kanjiSource.getWord(
-              args.word,
-              pronunciation: args.pronunciation,
-            ),
-            builder: (context, model) {
-              return LargeWordView(model);
-            },
-          ),
+    return Screen(
+      appBar: DefaultAppBar(header: Text("View Word")),
+      child: ContentLoader<WordModel>(
+        futureCallback: () => kanjiSource.getWord(
+          args.word,
+          pronunciation: args.pronunciation,
         ),
+        builder: (context, model) {
+          return LargeWordView(model);
+        },
       ),
     );
   }

@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:todays_kanji/delegates/search/wordsearch.dart';
 import 'package:todays_kanji/widgets/search_button.dart';
 

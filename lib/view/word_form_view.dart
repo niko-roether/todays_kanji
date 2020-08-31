@@ -23,6 +23,7 @@ class WordFormView extends StatelessWidget {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
+        // TODO add Conditional
         model.word != null
             ? JapaneseText(
                 model.word,
@@ -44,24 +45,5 @@ class WordFormView extends StatelessWidget {
         })
       ],
     );
-
-    // return Consumer<AppState>(builder: (context, state, child) {
-    //   List<Widget> content = [];
-    //   if (model.word != null) {
-    //     content.add(JapaneseText(
-    //       model.word,
-    //       style: this.heading ? theme.textTheme.headline6 : null,
-    //     ));
-    //     if (model.reading != null) {
-    //       content.add(reading);
-    //     }
-    //   } else if (model.reading != null) {
-    //     content.add(reading);
-    //   }
-    //   return Wrap(
-    //     children: content,
-    //     crossAxisAlignment: WrapCrossAlignment.center,
-    //   );
-    // });
   }
 }

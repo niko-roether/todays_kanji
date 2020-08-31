@@ -34,11 +34,12 @@ class WordSearch extends Search {
 
   @override
   FutureOr<List<String>> fetchSuggestions() async {
+    if (query.length < 3) return [];
     List<WordModel> models = await kanjiSource.searchWords(query);
     List<String> suggestions = [];
     for (WordModel model in models)
-      suggestions.addAll(_getSuggestableTerms(model)
-          .where((element) => element.startsWith(query)));
+      suggestions.addAll(_getSuggestableTerms(model).where(
+          (element) => element.toLowerCase().contains(query.toLowerCase())));
     return removeDuplicates(suggestions);
   }
 

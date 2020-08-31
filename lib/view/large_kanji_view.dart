@@ -8,7 +8,9 @@ import 'package:todays_kanji/view/kanji_view.dart';
 import 'package:todays_kanji/view/word_view.dart';
 import 'package:todays_kanji/widgets/annotation.dart';
 import 'package:todays_kanji/widgets/annotations/jlpt_annotation.dart';
+import 'package:todays_kanji/widgets/conditional.dart';
 import 'package:todays_kanji/widgets/content_loader.dart';
+import 'package:todays_kanji/widgets/data_conditional.dart';
 import 'package:todays_kanji/widgets/info_card.dart';
 import 'package:todays_kanji/widgets/inherited/kanji_updater.dart';
 import 'package:todays_kanji/widgets/japanese_text.dart';
@@ -63,10 +65,14 @@ class LargeKanjiView extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                model.kunyomi.length > 0
-                    ? Flexible(child: kunyomi)
-                    : Container(),
-                model.onyomi.length > 0 ? Flexible(child: onyomi) : Container()
+                Conditional(
+                  condition: model.kunyomi.length > 0,
+                  child: Flexible(child: kunyomi),
+                ),
+                Conditional(
+                  condition: model.onyomi.length > 0,
+                  child: Flexible(child: onyomi),
+                ),
               ],
             ),
           );
@@ -90,9 +96,9 @@ class LargeKanjiView extends StatelessWidget {
             },
           ),
         ),
-        Builder(builder: (BuildContext context) {
-          if (model.strokeOrderGifUrl == null) return Container();
-          return InfoCard(
+        Conditional(
+          condition: model.strokeOrderGifUrl != null,
+          child: InfoCard(
             heading: "Stroke Order",
             child: Center(
               child: Padding(
@@ -116,80 +122,83 @@ class LargeKanjiView extends StatelessWidget {
                 ),
               ),
             ),
-          );
-        }),
-        Builder(builder: (BuildContext context) {
-          var wordList = <Widget>[];
-          if (model.examples == null) return Container();
-          for (var word in model.examples) {
-            wordList.add(Padding(
-              padding: EdgeInsets.only(bottom: 16),
-              child: WordView(word, partition: false),
-            ));
-          }
-          if (wordList.length == 0) return Container();
-          wordList.removeLast();
-          return InfoCard(
-            heading: "Examples",
-            contentIndent: 20,
-            child: Column(
-              children: [
-                ...wordList,
-                isMain
-                    ? Container()
-                    : FlatButton(
-                        color: theme.accentColor,
-                        textColor: theme.accentTextTheme.bodyText2.color,
-                        child: Text("More Words"),
-                        onPressed: () => Navigator.pushNamed(
-                          context,
-                          WordListScreen.ROUTENAME,
-                          arguments:
-                              WordListArguments(query: "*${model.character}*"),
-                        ),
-                      )
-              ],
-            ),
-          );
-        }),
-      ],
-      stackItems: [
-        Builder(
-          builder: (context) {
-            if (!isMain) return Container();
-            return IconButton(
-              icon: Icon(Icons.refresh),
-              tooltip: "Reroll Kanji",
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text("Confirm Reroll"),
-                      content: SingleChildScrollView(
-                        child: Text(
-                          "Are you shure you want to reroll your daily kanji?",
-                        ),
+          ),
+        ),
+        DataConditional<List<Widget>>(
+          dataGetter: (context) {
+            var wordList = <Widget>[];
+            if (model.examples == null) return null;
+            for (var word in model.examples)
+              wordList.add(Padding(
+                padding: EdgeInsets.only(bottom: 16),
+                child: WordView(word, partition: false),
+              ));
+            return wordList;
+          },
+          condition: (data) => data != null && data.length > 0,
+          builder: (BuildContext context, List<Widget> wordList) {
+            wordList.removeLast();
+            return InfoCard(
+              heading: "Examples",
+              contentIndent: 20,
+              child: Column(
+                children: [
+                  ...wordList,
+                  Conditional(
+                    condition: !isMain,
+                    child: FlatButton(
+                      color: theme.accentColor,
+                      textColor: theme.accentTextTheme.bodyText2.color,
+                      child: Text("More Words"),
+                      onPressed: () => Navigator.pushNamed(
+                        context,
+                        WordListScreen.ROUTENAME,
+                        arguments:
+                            WordListArguments(query: "*${model.character}*"),
                       ),
-                      actions: [
-                        FlatButton(
-                          child: Text("REROLL"),
-                          onPressed: () {
-                            kanjiUpdater.reroll();
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                        FlatButton(
-                          child: Text("CANCEL"),
-                          onPressed: () => Navigator.of(context).pop(),
-                        )
-                      ],
-                    );
-                  },
-                );
-              },
+                    ),
+                  ),
+                ],
+              ),
             );
           },
+        ),
+      ],
+      stackItems: [
+        Conditional(
+          condition: isMain,
+          child: IconButton(
+            icon: Icon(Icons.refresh),
+            tooltip: "Reroll Kanji",
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text("Confirm Reroll"),
+                    content: SingleChildScrollView(
+                      child: Text(
+                        "Are you shure you want to reroll your daily kanji?",
+                      ),
+                    ),
+                    actions: [
+                      FlatButton(
+                        child: Text("REROLL"),
+                        onPressed: () {
+                          kanjiUpdater.reroll();
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      FlatButton(
+                        child: Text("CANCEL"),
+                        onPressed: () => Navigator.of(context).pop(),
+                      )
+                    ],
+                  );
+                },
+              );
+            },
+          ),
         ),
         Align(
           alignment: Alignment.topRight,
